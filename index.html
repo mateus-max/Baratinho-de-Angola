@@ -56,9 +56,12 @@ const money=n=>new Intl.NumberFormat("pt-AO",{style:"currency",currency:"AOA",ma
 const FORMSPREE_ENDPOINT="https://formspree.io/f/mgakoajg";
 async function notifyFormspree(eventName,details){
  const payload={_subject:"Baratinho de Angola — "+eventName,_template:"table",event:eventName,platform:"Baratinho de Angola",date:new Date().toLocaleString("pt-AO",{timeZone:"Africa/Luanda"}),...details};
- const response=await fetch(FORMSPREE_ENDPOINT,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},body:JSON.stringify(payload)});
- if(!response.ok){let reason="HTTP "+response.status;try{const body=await response.json();reason=body.errors?.map(x=>x.message).join("; ")||reason}catch{}throw new Error("Notificação Formspree falhou: "+reason)}
- return true;
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8000);
+ try{
+  const response=await fetch(FORMSPREE_ENDPOINT,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},body:JSON.stringify(payload),signal:controller.signal});
+  if(!response.ok){let reason="HTTP "+response.status;try{const body=await response.json();reason=body.errors?.map(x=>x.message).join("; ")||reason}catch{}throw new Error("Notificação Formspree falhou: "+reason)}
+  return true;
+ }finally{clearTimeout(timer)}
 }
 const admin=()=>false;$("authForm").dataset.mode="login";
 function authMsg(t,type="error"){$("authMessage").innerHTML=t?'<div class="message '+type+'">'+esc(t)+'</div>':""}
