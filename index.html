@@ -15,7 +15,7 @@
 <body>
 <section id="authView" class="auth-wrap">
  <div class="auth-hero"><div class="brand"><span class="brand-mark">BA</span> Baratinho de Angola</div><div><h1>Comprar e vender em Angola ficou mais simples.</h1><p>Descubra produtos, encontre vendedores e acompanhe as suas encomendas numa única plataforma nacional.</p></div><div class="hero-points"><span>✓ Vendedores identificados</span><span>✓ Acompanhamento de encomendas</span><span>✓ Compra com mais confiança</span></div></div>
- <div class="auth-side"><div class="auth-card"><div class="brand" style="margin-bottom:28px"><span class="brand-mark">BA</span> Baratinho de Angola</div><h2 id="authTitle">Bem-vindo!</h2><p class="sub" id="authSub">Entre na sua conta para continuar.</p><div class="tabs"><button id="loginTab" class="active" type="button">Entrar</button><button id="registerTab" type="button">Criar conta</button></div>
+ <div class="auth-side"><div class="auth-card"><div class="brand" style="margin-bottom:28px"><span class="brand-mark">BA</span> Baratinho de Angola</div><h2 id="authTitle">Bem-vindo!</h2><p class="sub" id="authSub">Entre na sua conta para continuar.</p><div class="tabs"><button id="loginTab" class="active" type="button" onclick="window.switchAuthMode('login')">Entrar</button><button id="registerTab" type="button" onclick="window.switchAuthMode('register')">Criar conta</button></div>
  <form id="authForm"><div id="nameField" class="field hidden"><label>Nome completo</label><input id="fullName" autocomplete="name" maxlength="120"></div><div id="extraRegisterFields" class="hidden"><div class="field"><label>Telefone / WhatsApp</label><input id="phone" type="tel" maxlength="30" placeholder="+244 9XX XXX XXX"></div><div class="field"><label>Província</label><select id="regProvince"><option value="">Seleccione a província</option><option>Bengo</option><option>Benguela</option><option>Bié</option><option>Cabinda</option><option>Cuando</option><option>Cubango</option><option>Cuanza Norte</option><option>Cuanza Sul</option><option>Cunene</option><option>Huambo</option><option>Huíla</option><option>Luanda</option><option>Lunda Norte</option><option>Lunda Sul</option><option>Malanje</option><option>Moxico</option><option>Moxico Leste</option><option>Namibe</option><option>Uíge</option><option>Zaire</option></select></div><div class="field"><label>Município</label><input id="regMunicipality" maxlength="100" placeholder="O seu município"></div></div><div class="field"><label>E-mail</label><input id="email" type="email" required autocomplete="email"></div><div class="field"><label>Palavra-passe</label><input id="password" type="password" required minlength="6" autocomplete="current-password"></div><div id="roleField" class="field hidden"><label>Como pretende utilizar a plataforma?</label><select id="role"><option value="buyer">Quero comprar produtos</option><option value="seller">Quero vender produtos</option></select></div><button class="btn btn-primary btn-block" id="authSubmit">Entrar na plataforma</button></form><div id="authMessage"></div><p class="small-note">Ao continuar, aceita os termos de utilização e a política de privacidade do Baratinho de Angola.</p></div></div>
 </section>
 <section id="pendingView" class="hidden" style="min-height:100vh;background:#f4f7fb;display:grid;place-items:center;padding:24px"><div class="panel" style="max-width:600px;width:100%;padding:34px;text-align:center"><div class="brand" style="justify-content:center;margin-bottom:26px"><span class="brand-mark">BA</span> Baratinho de Angola</div><div style="width:76px;height:76px;border-radius:50%;background:#e8f7ef;color:#14734e;display:grid;place-items:center;font-size:38px;margin:0 auto 18px">✓</div><h2 id="pendingTitle" style="font-size:27px;margin:0 0 12px">Pedido submetido com sucesso!</h2><p id="pendingDescription" class="muted" style="font-size:15px;line-height:1.7">A sua conta foi criada e os seus dados foram enviados à Direcção do Baratinho de Angola para análise e aprovação.</p><div class="message" style="background:#fff4d8;color:#805d13;text-align:left"><strong>Estado do pedido: Pendente de aprovação.</strong><br>Ainda não precisa fazer mais nada. A administração irá analisar os dados da sua conta.</div><div class="panel" style="background:#f8fafc;box-shadow:none;text-align:left;margin:18px 0"><strong>O que acontece agora?</strong><ol style="padding-left:22px;color:#526176;line-height:1.8;margin-bottom:0"><li>A Direcção recebe a notificação do seu registo.</li><li>Os seus dados são analisados e a conta é aprovada ou recusada.</li><li>Depois da aprovação, basta voltar a esta plataforma e entrar com o mesmo e-mail e palavra-passe para aceder ao painel.</li></ol></div><p id="pendingNoticeStatus" class="small-note">A notificação do registo foi enviada à administração.</p><button class="btn btn-primary" id="pendingLogout">Terminar sessão</button><p class="small-note">Guarde o seu e-mail e palavra-passe. Não crie outra conta para acompanhar este pedido.</p></div></section>
@@ -29,18 +29,19 @@
  const login=document.getElementById('loginTab'), register=document.getElementById('registerTab');
  const name=document.getElementById('nameField'), extra=document.getElementById('extraRegisterFields'), role=document.getElementById('roleField');
  const title=document.getElementById('authTitle'), sub=document.getElementById('authSub'), submit=document.getElementById('authSubmit'), password=document.getElementById('password'), msg=document.getElementById('authMessage');
- function switchTab(mode){
+ window.switchAuthMode=function(mode){
    const isRegister=mode==='register';
    login.classList.toggle('active',!isRegister); register.classList.toggle('active',isRegister);
    name.classList.toggle('hidden',!isRegister); extra.classList.toggle('hidden',!isRegister); role.classList.toggle('hidden',!isRegister);
    title.textContent=isRegister?'Crie a sua conta':'Bem-vindo!';
-   sub.textContent=isRegister?'Registe-se para comprar ou vender em Angola.':'Entre na sua conta para continuar.';
+   sub.textContent=isRegister?'Preencha os seus dados para criar a sua conta.':'Entre na sua conta para continuar.';
    submit.textContent=isRegister?'Criar conta':'Entrar na plataforma';
    password.autocomplete=isRegister?'new-password':'current-password';
+   document.getElementById('authForm').dataset.mode=mode;
    msg.innerHTML='';
- }
- login.addEventListener('click',()=>switchTab('login'));
- register.addEventListener('click',()=>switchTab('register'));
+ };
+ login.addEventListener('click',()=>window.switchAuthMode('login'));
+ register.addEventListener('click',()=>window.switchAuthMode('register'));
 })();
 </script>
 <script type="module">
