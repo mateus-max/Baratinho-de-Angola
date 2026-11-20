@@ -112,6 +112,83 @@
 
 
 #appView #storeCoverPreview{width:100%;max-height:230px;object-fit:cover;border-radius:14px;margin-top:12px}
+
+/* Mobile marketplace storefront — reference layout */
+#appView{--navy:#062f80;--blue:#0757c9;--gold:#ffbf00;background:#f4f7ff}
+#appView .topbar{background:linear-gradient(110deg,#07317f,#0755bd);color:#fff;border:0;min-height:82px;height:auto;padding:10px 18px;gap:10px}
+#appView .brand{color:#fff;min-width:0;gap:12px}
+#appView .brand-mark{width:54px;height:54px;min-width:54px;border-radius:17px;background:#ffbf00;color:#07317f;font-size:23px}
+#appView .brand-name{font-size:clamp(16px,2.4vw,23px);white-space:nowrap}
+#appView .top-actions{gap:10px}
+#appView .header-notice{border:0;background:transparent;color:white;font-size:25px;padding:6px}
+#appView .user-chip{background:#ffffff20;color:#fff;padding:5px 10px 5px 5px;max-width:190px}
+#appView .user-chip span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#appView #logoutBtn{background:#fff;color:#07317f;padding:10px 13px}
+#appView .menu-toolbar,#appView #mainNav,#appView #menuBackdrop{display:none!important}
+#appView .layout{display:block;min-height:calc(100vh - 82px);padding-bottom:85px}
+#appView .main{max-width:1200px;padding:22px 24px;margin:auto}
+#appView .mobile-search-wrap{display:flex;align-items:center;gap:8px;background:white;border-radius:40px;padding:5px 7px 5px 18px;box-shadow:0 4px 16px #092f7312;margin:0 0 18px}
+#appView .mobile-search-wrap input{flex:1;min-width:0;border:0;outline:0;padding:10px 0;font-size:15px}
+#appView .mobile-search-wrap button{border:0;border-radius:50%;width:43px;height:43px;background:#ffbf00;color:#062f80;font-size:27px}
+#appView .mobile-promo{min-height:205px;border-radius:25px;padding:25px 28px;background:linear-gradient(115deg,#06245e,#0759ca 70%,#ffbf00 70.2%,#ffbf00 100%);color:white;display:flex;align-items:center;justify-content:space-between;overflow:hidden;margin-bottom:18px}
+#appView .promo-copy{max-width:65%;position:relative;z-index:1}
+#appView .promo-copy h1{font-size:clamp(24px,4vw,40px);line-height:1.05;margin:0 0 9px;color:white;font-weight:900}
+#appView .promo-copy p{font-size:16px;color:#e7efff;margin:0 0 15px}
+#appView .promo-copy button{border:0;border-radius:30px;background:#ffbf00;color:#082d70;padding:10px 18px;font-weight:850}
+#appView .promo-art{font-size:clamp(55px,9vw,105px);filter:drop-shadow(0 8px 8px #001b4a55)}
+#appView .benefit-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0 26px}
+#appView .benefit-grid>div{background:white;border:1px solid #e7edf7;border-radius:17px;padding:15px 7px;text-align:center;font-size:13px;font-weight:800;color:#092f73;box-shadow:0 5px 16px #092f7310}
+#appView .benefit-grid span{display:block;font-size:25px;margin-bottom:5px}
+#appView .mobile-categories{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+#appView .mobile-categories .category-tile{border:1px solid #e4ebf6;border-radius:17px;padding:14px 6px;min-height:112px;font-size:13px;box-shadow:0 4px 14px #092f730c}
+#appView .mobile-categories .category-tile span{font-size:34px}
+#appView .featured-stores{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+#appView .store-mini{min-width:0;border:1px solid #e4ebf6;background:white;border-radius:17px;padding:13px 8px;display:flex;flex-direction:column;align-items:center;gap:5px;color:#092f73;box-shadow:0 4px 14px #092f730c}
+#appView .store-mini-logo{width:54px;height:54px;border-radius:50%;background:#eaf1ff;display:grid;place-items:center;font-size:27px;overflow:hidden}
+#appView .store-mini-logo img{width:100%;height:100%;object-fit:cover}
+#appView .store-mini strong{font-size:14px;text-align:center;overflow-wrap:anywhere}
+#appView .store-mini small{font-size:11px;color:#718096;text-align:center}
+#appView .mobile-bottom-nav{display:none}
+@media(max-width:760px){
+ #appView .topbar{height:auto;min-height:70px;padding:8px 10px;gap:5px}
+ #appView .brand{gap:8px}
+ #appView .brand-mark{width:43px;height:43px;min-width:43px;border-radius:50%;font-size:20px}
+ #appView .brand-name{font-size:15px;white-space:normal;line-height:1.12;max-width:125px}
+ #appView .top-actions{gap:5px}
+ #appView .header-notice{font-size:21px;padding:3px}
+ #appView .user-chip{max-width:100px;font-size:11px;gap:5px;padding:4px}
+ #appView .user-avatar{width:30px;height:30px;min-width:30px}
+ #appView #logoutBtn{font-size:12px;padding:9px 10px}
+ #appView .layout{min-height:calc(100vh - 70px);padding-bottom:82px}
+ #appView .main{padding:16px 14px 24px}
+ #appView .mobile-search-wrap{margin-bottom:14px}
+ #appView .mobile-promo{min-height:190px;padding:20px 17px;border-radius:21px}
+ #appView .promo-copy{max-width:72%}
+ #appView .promo-copy h1{font-size:27px}
+ #appView .promo-copy p{font-size:14px}
+ #appView .promo-art{font-size:58px}
+ #appView .benefit-grid{gap:7px;margin:14px 0 22px}
+ #appView .benefit-grid>div{font-size:11px;padding:12px 4px;border-radius:14px}
+ #appView .benefit-grid span{font-size:22px}
+ #appView .section-title{margin:22px 0 11px}
+ #appView .section-title h2{font-size:18px}
+ #appView .section-title .btn{font-size:12px;padding:9px 10px}
+ #appView .mobile-categories{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ #appView .mobile-categories .category-tile{min-height:100px}
+ #appView .featured-stores{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #appView .mobile-bottom-nav{position:fixed;z-index:40;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));padding:7px 4px calc(7px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #e4ebf6;box-shadow:0 -5px 22px #092f7312}
+ #appView .mobile-bottom-nav button{border:0;background:transparent;color:#091d4c;font-size:10px;font-weight:750;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:5px 1px;min-width:0;border-radius:14px}
+ #appView .mobile-bottom-nav button>span{font-size:22px;line-height:1.1;position:relative}
+ #appView .mobile-bottom-nav button.active{background:#0757c9;color:white}
+ #appView .mobile-bottom-nav i{position:absolute;top:-7px;right:-12px;border-radius:50%;background:#ed2525;color:white;font-size:9px;font-style:normal;padding:2px 5px}
+ #appView .grid-products{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+}
+@media(max-width:370px){
+ #appView .brand-name{max-width:100px;font-size:13px}
+ #appView .user-chip{max-width:75px}
+ #appView .mobile-bottom-nav button{font-size:9px}
+}
+
 </style>
 </head>
 <body>
@@ -122,8 +199,8 @@
 </section>
 <section id="pendingView" class="hidden" style="min-height:100vh;background:#f4f7fb;display:grid;place-items:center;padding:24px"><div class="panel" style="max-width:600px;width:100%;padding:34px;text-align:center"><div class="brand" style="justify-content:center;margin-bottom:26px"><span class="brand-mark">BA</span> Baratinho de Angola</div><div style="width:76px;height:76px;border-radius:50%;background:#e8f7ef;color:#14734e;display:grid;place-items:center;font-size:38px;margin:0 auto 18px">✓</div><h2 id="pendingTitle" style="font-size:27px;margin:0 0 12px">Pedido submetido com sucesso!</h2><p id="pendingDescription" class="muted" style="font-size:15px;line-height:1.7">A sua conta foi criada e os seus dados foram enviados à Direcção do Baratinho de Angola para análise e aprovação.</p><div class="message" style="background:#fff4d8;color:#805d13;text-align:left"><strong>Estado do pedido: Pendente de aprovação.</strong><br>Ainda não precisa fazer mais nada. A administração irá analisar os dados da sua conta.</div><div class="panel" style="background:#f8fafc;box-shadow:none;text-align:left;margin:18px 0"><strong>O que acontece agora?</strong><ol style="padding-left:22px;color:#526176;line-height:1.8;margin-bottom:0"><li>A Direcção recebe a notificação do seu registo.</li><li>Os seus dados são analisados e a conta é aprovada ou recusada.</li><li>Depois da aprovação, basta voltar a esta plataforma e entrar com o mesmo e-mail e palavra-passe para aceder ao painel.</li></ol></div><p id="pendingNoticeStatus" class="small-note">A notificação do registo foi enviada à administração.</p><button class="btn btn-primary" id="pendingLogout">Terminar sessão</button><p class="small-note">Guarde o seu e-mail e palavra-passe. Não crie outra conta para acompanhar este pedido.</p></div></section>
 <section id="appView" class="app hidden">
- <header class="topbar"><div class="brand"><span class="brand-mark">BA</span> Baratinho de Angola</div><div class="top-actions"><span class="user-chip" id="userChip">A minha conta</span><button class="btn btn-light" id="logoutBtn">Sair</button></div></header>
- <div class="layout"><div class="menu-toolbar"><button type="button" id="menuToggle" class="menu-toggle" aria-expanded="false">☰ Menu</button><span id="currentSectionLabel">Visão geral</span></div><div id="menuBackdrop" class="menu-backdrop"></div><aside class="sidebar" id="mainNav" aria-label="Menu principal"></aside><main class="main" id="mainContent"></main></div>
+ <header class="topbar"><div class="brand"><span class="brand-mark">BA</span><span class="brand-name">Baratinho de Angola</span></div><div class="top-actions"><button class="header-notice" type="button" aria-label="Notificações">♧</button><span class="user-chip" id="userChip">A minha conta</span><button class="btn btn-light" id="logoutBtn">Sair</button></div></header>
+ <div class="layout"><div class="menu-toolbar"><button type="button" id="menuToggle" class="menu-toggle" aria-expanded="false">☰ Menu</button><span id="currentSectionLabel">Visão geral</span></div><div id="menuBackdrop" class="menu-backdrop"></div><aside class="sidebar" id="mainNav" aria-label="Menu principal"></aside><main class="main" id="mainContent"></main><nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Navegação principal"><button data-page="dashboard" class="active"><span>⌂</span>Início</button><button data-page="market"><span>▦</span>Explorar</button><button data-page="orders"><span>🛒<i id="cartBadge">2</i></span>Carrinho</button><button data-page="favorites"><span>♡</span>Favoritos</button><button data-page="store"><span>♧</span>Minhas lojas</button><button data-page="profile"><span>♙</span>Perfil</button></nav></div>
 </section>
 <script>
 /* Tabs are wired immediately, independently of Firebase initialization. */
@@ -224,9 +301,9 @@ function buildRoleNavigation(){
  const seller=profile?.role==="seller";
  const items=admin?[["dashboard","▦","Visão geral"],["users","♙","Utilizadores"],["sellers","♧","Vendedores"],["products","▣","Produtos"],["orders","🛒","Encomendas"],["reports","▥","Relatórios"],["settings","⚙","Ajustes"]]:seller?[["dashboard","⌂","Início"],["store","🏪",profile.storeName?"Minha loja":"Criar loja online"],["products","⬡","Produtos"],["orders","▣","Vendas"],["messages","✉","Mensagens"],["profile","♙","Perfil"],["publish","＋","Publicar"]]:[["dashboard","⌂","Início"],["market","⌕","Explorar"],["orders","🛒","Carrinho"],["favorites","♡","Favoritos"],["profile","♙","Perfil"]];
  $("mainNav").innerHTML=items.map(([page,icon,label])=>'<button class="nav-btn '+(page==="dashboard"?"active":"")+'" data-page="'+page+'"><span class="nav-icon">'+icon+'</span>'+label+'</button>').join("");
- document.querySelectorAll(".nav-btn").forEach(b=>b.onclick=()=>render(b.dataset.page));initPanelMenu();
+ document.querySelectorAll(".nav-btn").forEach(b=>b.onclick=()=>render(b.dataset.page));document.querySelectorAll("#mobileBottomNav [data-page]").forEach(b=>b.onclick=()=>render(b.dataset.page));initPanelMenu();
 }
-async function render(page){currentPage=page;try{history.replaceState(null,"","#/"+encodeURIComponent(page))}catch{};document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===page));const label=$( "currentSectionLabel");if(label)label.textContent=({dashboard:"Visão geral",market:"Explorar produtos",publish:"Publicar produto",products:"Os meus produtos",orders:"Encomendas",favorites:"Favoritos",profile:"Meu perfil","create-store":"Criar loja online",store:"Minha loja",users:"Utilizadores",sellers:"Vendedores",reports:"Relatórios",settings:"Ajustes",messages:"Mensagens"})[page]||"Painel";closePanelMenu();const main=$("mainContent");main.innerHTML='<div class="empty">A carregar...</div>';try{
+async function render(page){currentPage=page;try{history.replaceState(null,"","#/"+encodeURIComponent(page))}catch{};document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===page));document.querySelectorAll("#mobileBottomNav [data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page));const label=$( "currentSectionLabel");if(label)label.textContent=({dashboard:"Visão geral",market:"Explorar produtos",publish:"Publicar produto",products:"Os meus produtos",orders:"Encomendas",favorites:"Favoritos",profile:"Meu perfil","create-store":"Criar loja online",store:"Minha loja",users:"Utilizadores",sellers:"Vendedores",reports:"Relatórios",settings:"Ajustes",messages:"Mensagens"})[page]||"Painel";closePanelMenu();const main=$("mainContent");main.innerHTML='<div class="empty">A carregar...</div>';try{
 if(page==="dashboard"){
  let all=[],allOrders=[],dashboardWarnings=[];try{all=await readProducts()}catch(err){console.error("Leitura de produtos:",err);dashboardWarnings.push("Não foi possível carregar produtos: "+friendly(err))}try{const ordersSnap=await get(ref(db,"orders"));allOrders=Object.entries(ordersSnap.val()||{})}catch(err){console.error("Leitura de encomendas:",err);dashboardWarnings.push("Não foi possível carregar encomendas: "+friendly(err))}const orders=allOrders.filter(([id,o])=>o.buyerUid===currentUser.uid||o.sellerUid===currentUser.uid),mine=all.filter(([id,p])=>p.sellerUid===currentUser.uid);
  if(profile.role==="admin"){
@@ -234,8 +311,16 @@ if(page==="dashboard"){
  }else if(profile.role==="seller"){
   main.innerHTML=(dashboardWarnings.length?'<div class="message error">'+dashboardWarnings.map(esc).join("<br>")+"</div>":"")+'<div class="seller-hero"><div><h1>Painel do Vendedor</h1><p>Gira os seus produtos e vendas</p></div><div class="hero-symbol">🏪</div></div><div class="seller-stats"><div class="metric-card"><div class="metric-icon">📦</div><strong>'+mine.length+'</strong><span>Produtos</span></div><div class="metric-card"><div class="metric-icon">🛍️</div><strong>'+orders.filter(([id,o])=>o.sellerUid===currentUser.uid).length+'</strong><span>Vendas</span></div><div class="metric-card"><div class="metric-icon">👁️</div><strong>—</strong><span>Visualizações</span></div><div class="metric-card"><div class="metric-icon">💰</div><strong>—</strong><span>Receita total</span></div></div><button class="btn btn-primary btn-block" data-goto="publish" style="margin-bottom:16px;padding:15px">＋ Publicar novo produto</button><div class="action-list">'+[['products','▣','Meus produtos'],['orders','🛒','Encomendas recebidas'],['messages','✉','Mensagens de clientes'],['reports','▥','Estatísticas de vendas'],['profile','♙','Dados da loja']].map(([p,i,t])=>'<div class="action-row" data-goto="'+p+'"><span class="action-icon">'+i+'</span>'+t+'<span class="arrow">›</span></div>').join('')+'</div>';
  }else{
-  main.innerHTML=(dashboardWarnings.length?'<div class="message error">'+dashboardWarnings.map(esc).join("<br>")+"</div>":"")+'<div class="buyer-hero"><div><h1>Olá, '+esc((profile.name||"").split(" ")[0]||"cliente")+' 👋</h1><p>Bem-vindo ao seu painel</p></div><div class="hero-symbol">🛍️</div><div class="hero-search"><input id="buyerSearch" placeholder="Pesquisar produtos..."></div></div><div class="quick-grid"><div class="quick-card" data-goto="orders"><span class="qicon">🛒</span>Minhas encomendas</div><div class="quick-card" data-goto="favorites"><span class="qicon">♡</span>Favoritos</div><div class="quick-card" data-goto="orders"><span class="qicon">◷</span>Histórico</div><div class="quick-card" data-goto="profile"><span class="qicon">⚙</span>Meu perfil</div></div><div class="section-title"><h2>Explorar categorias</h2><button class="btn btn-light" data-goto="market">Ver todas ›</button></div><div class="category-grid">'+[['💻','Electrónicos'],['👕','Moda'],['🛋️','Casa e decoração'],['💄','Beleza'],['•••','Mais']].map(([i,t])=>'<div class="category-tile" data-goto="market"><span>'+i+'</span>'+t+'</div>').join('')+'</div><div class="section-title"><h2>Ofertas em destaque</h2><button class="btn btn-light" data-goto="market">Ver todos ›</button></div><div class="grid-products">'+(all.slice(0,6).map(([id,p])=>productCard(id,p)).join("")||'<div class="panel empty">Ainda não existem produtos disponíveis.</div>')+'</div>';
-  $("buyerSearch").onkeydown=e=>{if(e.key==="Enter")render("market")};
+  let featuredStores=[];try{const storeSnap=await get(ref(db,"sellers"));featuredStores=Object.entries(storeSnap.val()||{}).filter(([uid,s])=>s&&s.status==="approved").slice(0,6)}catch(storeErr){console.warn("Lojas em destaque indisponíveis",storeErr)}
+  const categories=[["💻","Electrónicos"],["👕","Moda"],["🏠","Casa e decoração"],["💄","Beleza e saúde"],["⚽","Desporto"],["📚","Livros"],["🚗","Automóveis"],["▦","Outras categorias"]];
+  main.innerHTML=(dashboardWarnings.length?'<div class="message error">'+dashboardWarnings.map(esc).join("<br>")+"</div>":"")+
+  '<div class="mobile-search-wrap"><input id="buyerSearch" placeholder="Pesquisar produtos, lojas ou categorias..."><button type="button" id="buyerSearchBtn">⌕</button></div>'+
+  '<section class="mobile-promo"><div class="promo-copy"><h1>Descubra boas ofertas</h1><p>Os melhores produtos, perto de si.</p><button data-goto="market">Explorar agora ›</button></div><div class="promo-art">🛍️</div></section>'+
+  '<div class="benefit-grid"><div><span>🚚</span>Entrega rápida</div><div><span>🛡️</span>Compras seguras</div><div><span>◇</span>Melhores preços</div><div><span>🎧</span>Suporte online</div></div>'+
+  '<div class="section-title"><h2>Explorar categorias</h2><button class="btn btn-light" data-goto="market">Ver todas ›</button></div><div class="category-grid mobile-categories">'+categories.map(([i,t])=>'<button class="category-tile" data-goto="market"><span>'+i+'</span>'+t+'</button>').join("")+'</div>'+
+  '<div class="section-title"><h2>Lojas em destaque</h2><button class="btn btn-light" data-goto="market">Ver todas ›</button></div><div class="featured-stores">'+(featuredStores.map(([uid,s])=>'<button class="store-mini" data-goto="market"><span class="store-mini-logo">'+(s.store?.cover||s.cover?'<img src="'+(s.store?.cover||s.cover)+'" alt="">':'🏪')+'</span><strong>'+esc(s.store?.name||s.name||"Loja")+'</strong><small>'+esc([s.store?.municipality||s.municipality,s.store?.province||s.province].filter(Boolean).join(", ")||"Angola")+'</small></button>').join("")||'<div class="empty">As lojas em destaque aparecerão aqui.</div>')+'</div>'+
+  '<div class="section-title"><h2>Produtos em destaque</h2><button class="btn btn-light" data-goto="market">Ver todos ›</button></div><div class="grid-products">'+(all.slice(0,6).map(([id,p])=>productCard(id,p)).join("")||'<div class="panel empty">Ainda não existem produtos disponíveis.</div>')+'</div>';
+  const searchAction=()=>render("market");$("buyerSearch").onkeydown=e=>{if(e.key==="Enter")searchAction()};$("buyerSearchBtn").onclick=searchAction;
  }
 '<div class="stats"><div class="stat"><span>Produtos disponíveis</span><strong>'+all.length+'</strong></div><div class="stat"><span>Os meus produtos</span><strong>'+mine.length+'</strong></div><div class="stat"><span>As minhas encomendas</span><strong>'+orders.length+'</strong></div><div class="stat"><span>Tipo de conta</span><strong style="font-size:19px">'+(profile.role==="seller"?"Vendedor":"Comprador")+'</strong></div></div><div class="panel"><div class="row-between"><h3>Produtos em destaque</h3><button class="btn btn-light" data-goto="market">Ver todos</button></div><div class="grid-products">'+(all.slice(0,6).map(([id,p])=>productCard(id,p)).join("")||'<div class="empty">Ainda não existem produtos publicados.</div>')+'</div></div>';
 }else if(["users","sellers","reports","settings","messages"].includes(page)){main.innerHTML=pageHead("Área em preparação","Esta secção visual está definida; as operações administrativas serão ligadas numa etapa própria.")+'<div class="panel">As funcionalidades desta área ainda não estão ligadas ao Firebase.</div>';
