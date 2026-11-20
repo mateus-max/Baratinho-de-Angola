@@ -81,6 +81,23 @@
  #appView .product-photo{height:125px}
 }
 
+
+/* Menu compacto e navegação persistente */
+#appView .layout{display:grid;grid-template-columns:1fr;min-height:calc(100vh - 76px);position:relative}
+#appView .menu-toolbar{display:flex;align-items:center;gap:14px;background:#092f73;color:white;padding:12px 16px;min-height:58px}
+#appView .menu-toggle{border:0;border-radius:12px;background:#fff;color:#092f73;padding:11px 16px;font-weight:800;font-size:15px}
+#appView #currentSectionLabel{font-weight:700}
+#appView .sidebar{position:fixed;z-index:30;left:0;top:0;bottom:0;width:min(82vw,310px);overflow-y:auto;display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:20px 14px;background:#092f73;transform:translateX(-105%);transition:transform .22s ease;box-shadow:12px 0 34px #061b3c35}
+#appView .sidebar.menu-open{transform:translateX(0)}
+#appView .sidebar .nav-btn{width:100%;justify-content:flex-start;white-space:normal}
+#appView .menu-backdrop{display:none;position:fixed;inset:0;background:#07172d88;z-index:29}
+#appView .menu-backdrop.visible{display:block}
+#appView .main{width:100%;max-width:1500px;margin:0 auto}
+@media(min-width:900px){
+ #appView .layout{grid-template-columns:1fr}
+ #appView .menu-toolbar{padding-left:max(24px,calc((100vw - 1450px)/2))}
+}
+
 </style>
 </head>
 <body>
@@ -92,7 +109,7 @@
 <section id="pendingView" class="hidden" style="min-height:100vh;background:#f4f7fb;display:grid;place-items:center;padding:24px"><div class="panel" style="max-width:600px;width:100%;padding:34px;text-align:center"><div class="brand" style="justify-content:center;margin-bottom:26px"><span class="brand-mark">BA</span> Baratinho de Angola</div><div style="width:76px;height:76px;border-radius:50%;background:#e8f7ef;color:#14734e;display:grid;place-items:center;font-size:38px;margin:0 auto 18px">✓</div><h2 id="pendingTitle" style="font-size:27px;margin:0 0 12px">Pedido submetido com sucesso!</h2><p id="pendingDescription" class="muted" style="font-size:15px;line-height:1.7">A sua conta foi criada e os seus dados foram enviados à Direcção do Baratinho de Angola para análise e aprovação.</p><div class="message" style="background:#fff4d8;color:#805d13;text-align:left"><strong>Estado do pedido: Pendente de aprovação.</strong><br>Ainda não precisa fazer mais nada. A administração irá analisar os dados da sua conta.</div><div class="panel" style="background:#f8fafc;box-shadow:none;text-align:left;margin:18px 0"><strong>O que acontece agora?</strong><ol style="padding-left:22px;color:#526176;line-height:1.8;margin-bottom:0"><li>A Direcção recebe a notificação do seu registo.</li><li>Os seus dados são analisados e a conta é aprovada ou recusada.</li><li>Depois da aprovação, basta voltar a esta plataforma e entrar com o mesmo e-mail e palavra-passe para aceder ao painel.</li></ol></div><p id="pendingNoticeStatus" class="small-note">A notificação do registo foi enviada à administração.</p><button class="btn btn-primary" id="pendingLogout">Terminar sessão</button><p class="small-note">Guarde o seu e-mail e palavra-passe. Não crie outra conta para acompanhar este pedido.</p></div></section>
 <section id="appView" class="app hidden">
  <header class="topbar"><div class="brand"><span class="brand-mark">BA</span> Baratinho de Angola</div><div class="top-actions"><span class="user-chip" id="userChip">A minha conta</span><button class="btn btn-light" id="logoutBtn">Sair</button></div></header>
- <div class="layout"><aside class="sidebar" id="mainNav"></aside><main class="main" id="mainContent"></main></div>
+ <div class="layout"><div class="menu-toolbar"><button type="button" id="menuToggle" class="menu-toggle" aria-expanded="false">☰ Menu</button><span id="currentSectionLabel">Visão geral</span></div><div id="menuBackdrop" class="menu-backdrop"></div><aside class="sidebar" id="mainNav" aria-label="Menu principal"></aside><main class="main" id="mainContent"></main></div>
 </section>
 <script>
 /* Tabs are wired immediately, independently of Firebase initialization. */
@@ -160,8 +177,9 @@ async function routeSignedInUser(user){
   }
   $("pendingView").classList.add("hidden");$("appView").classList.remove("hidden");
   $("userChip").textContent=profile.name||profile.email;
-  document.querySelectorAll(".seller-only").forEach(el=>el.classList.toggle("hidden",profile.role!=="seller"));
-  await render("dashboard");
+  buildRoleNavigation();
+  const savedPage=location.hash.startsWith("#/")?decodeURIComponent(location.hash.slice(2)):"dashboard";
+  await render(savedPage);
  }catch(e){
   console.error("Falha ao abrir painel:",e);
   $("appView").classList.add("hidden");$("pendingView").classList.add("hidden");$("authView").classList.remove("hidden");
@@ -187,9 +205,9 @@ function buildRoleNavigation(){
  const seller=profile?.role==="seller";
  const items=admin?[["dashboard","▦","Visão geral"],["users","♙","Utilizadores"],["sellers","♧","Vendedores"],["products","▣","Produtos"],["orders","🛒","Encomendas"],["reports","▥","Relatórios"],["settings","⚙","Ajustes"]]:seller?[["dashboard","⌂","Início"],["products","⬡","Produtos"],["orders","▣","Vendas"],["messages","✉","Mensagens"],["profile","♙","Perfil"],["publish","＋","Publicar"]]:[["dashboard","⌂","Início"],["market","⌕","Explorar"],["orders","🛒","Carrinho"],["favorites","♡","Favoritos"],["profile","♙","Perfil"]];
  $("mainNav").innerHTML=items.map(([page,icon,label])=>'<button class="nav-btn '+(page==="dashboard"?"active":"")+'" data-page="'+page+'"><span class="nav-icon">'+icon+'</span>'+label+'</button>').join("");
- document.querySelectorAll(".nav-btn").forEach(b=>b.onclick=()=>render(b.dataset.page));
+ document.querySelectorAll(".nav-btn").forEach(b=>b.onclick=()=>render(b.dataset.page));initPanelMenu();
 }
-async function render(page){currentPage=page;document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===page));const main=$("mainContent");main.innerHTML='<div class="empty">A carregar...</div>';try{
+async function render(page){currentPage=page;try{history.replaceState(null,"","#/"+encodeURIComponent(page))}catch{};document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===page));const label=$( "currentSectionLabel");if(label)label.textContent=({dashboard:"Visão geral",market:"Explorar produtos",publish:"Publicar produto",products:"Os meus produtos",orders:"Encomendas",favorites:"Favoritos",profile:"Meu perfil",users:"Utilizadores",sellers:"Vendedores",reports:"Relatórios",settings:"Ajustes",messages:"Mensagens"})[page]||"Painel";closePanelMenu();const main=$("mainContent");main.innerHTML='<div class="empty">A carregar...</div>';try{
 if(page==="dashboard"){
  const all=await readProducts(),ordersSnap=await get(ref(db,"orders")),allOrders=Object.entries(ordersSnap.val()||{}),orders=allOrders.filter(([id,o])=>o.buyerUid===currentUser.uid||o.sellerUid===currentUser.uid),mine=all.filter(([id,p])=>p.sellerUid===currentUser.uid);
  if(profile.role==="admin"){
@@ -211,6 +229,8 @@ else if(page==="products"){const all=await readProducts(),mine=all.filter(([id,p
 bindActions();
 }catch(e){main.innerHTML=pageHead("Não foi possível carregar","Verifique as permissões do Realtime Database e tente novamente.")+'<div class="message error">'+esc(friendly(e))+'</div>'}}
 function fileBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)})}
+function closePanelMenu(){const menu=$("mainNav"),backdrop=$("menuBackdrop"),toggle=$("menuToggle");if(menu)menu.classList.remove("menu-open");if(backdrop)backdrop.classList.remove("visible");if(toggle)toggle.setAttribute("aria-expanded","false")}
+function initPanelMenu(){const toggle=$("menuToggle"),backdrop=$("menuBackdrop");if(toggle)toggle.onclick=()=>{const menu=$("mainNav"),open=!menu.classList.contains("menu-open");menu.classList.toggle("menu-open",open);backdrop.classList.toggle("visible",open);toggle.setAttribute("aria-expanded",String(open))};if(backdrop)backdrop.onclick=closePanelMenu}
 function bindActions(){document.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>render(b.dataset.goto));document.querySelectorAll("[data-buy]").forEach(b=>b.onclick=()=>buy(b.dataset.buy));document.querySelectorAll("[data-fav]").forEach(b=>b.onclick=()=>favorite(b.dataset.fav))}
 async function buy(id){try{const p=products[id]||(await get(ref(db,"products/"+id))).val();if(!p||p.status!=="active")throw Error("Este produto já não está disponível.");if(p.sellerUid===currentUser.uid)throw Error("Não pode comprar o seu próprio produto.");const qty=Number(prompt("Quantidade pretendida:", "1"));if(!Number.isInteger(qty)||qty<1||qty>Number(p.quantity))return;const unit=Number(p.promoPrice||p.price),order={buyerUid:currentUser.uid,sellerUid:p.sellerUid,productId:id,productName:p.name,quantity:qty,unitPrice:unit,total:unit*qty,status:"pending_payment",createdAt:Date.now(),paymentStatus:"awaiting_payment"};await set(push(ref(db,"orders")),order);alert("Pedido criado. A encomenda ficará pendente até à integração e confirmação do pagamento oficial.");render("orders")}catch(e){alert(friendly(e))}}
 async function favorite(id){try{const r=ref(db,"favorites/"+currentUser.uid+"/"+id),s=await get(r);if(s.exists()){await set(r,null)}else{await set(r,true)}alert("Lista de favoritos actualizada.");}catch(e){alert(friendly(e))}}
