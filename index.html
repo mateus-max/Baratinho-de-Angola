@@ -366,8 +366,8 @@ async function routeSignedInUser(user){
   $("pendingView").classList.add("hidden");$("appView").classList.remove("hidden");
   updateUserChip();
   watchUserNotifications(user.uid);
-  buildRoleNavigation();
   const sellerSnap=await get(ref(db,"sellers/"+user.uid));const sellerData=sellerSnap.val();profile.canSell=profile.role==="seller"||sellerData?.status==="approved";if(sellerData?.store?.name)profile.storeName=sellerData.store.name;
+  buildRoleNavigation();
   const pendingProduct=localStorage.getItem("baratinhoPendingCheckout");
   const savedPage=pendingProduct?"checkout":(location.hash.startsWith("#/")?decodeURIComponent(location.hash.slice(2)):"dashboard");
   await render(savedPage);
