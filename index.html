@@ -595,7 +595,13 @@
 .product-image-fullscreen img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;cursor:default}
 .product-image-fullscreen-close{position:absolute;top:14px;right:16px;width:44px;height:44px;border:0;border-radius:50%;background:#fff;color:#102e66;font-size:24px;font-weight:800;cursor:pointer}
 .product-image-fullscreen span{position:absolute;bottom:12px;left:0;right:0;text-align:center;color:#fff;font-size:12px}
-.detail-delivery-coverage{display:flex;flex-direction:column;gap:6px;padding:15px 16px;margin:12px 0 18px;border-radius:14px;background:#eaf3ff;border:1px solid #d7e7fb}.detail-delivery-coverage span{font-size:12px;color:#62758e}.detail-delivery-coverage strong{font-size:15px;color:#12386c}</style>
+.detail-delivery-coverage{display:flex;flex-direction:column;gap:6px;padding:15px 16px;margin:12px 0 18px;border-radius:14px;background:#eaf3ff;border:1px solid #d7e7fb}.detail-delivery-coverage span{font-size:12px;color:#62758e}.detail-delivery-coverage strong{font-size:15px;color:#12386c}
+/* Produtos da área autenticada: grelha consistente em colunas, igual ao catálogo público */
+#appView .grid-products{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-flow:row!important;align-items:stretch!important;gap:10px!important;width:100%!important}
+#appView .grid-products>.product-card{display:flex!important;flex-direction:column!important;grid-column:auto!important;grid-row:auto!important;width:100%!important;max-width:none!important;min-width:0!important;float:none!important;justify-self:stretch!important;align-self:stretch!important}
+#appView .grid-products>.product-card .product-info{width:100%!important;min-width:0!important}
+@media(min-width:900px){#appView .grid-products{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important}}
+</style>
 </head>
 <body>
 <section id="authView" class="auth-wrap">
@@ -688,9 +694,10 @@ async function routeSignedInUser(user){
   watchUserNotifications(user.uid);
   const sellerSnap=await get(ref(db,"sellers/"+user.uid));const sellerData=sellerSnap.val();profile.canSell=profile.role==="seller"||sellerData?.status==="approved";if(sellerData?.store?.name)profile.storeName=sellerData.store.name;
   buildRoleNavigation();
-  const pendingProduct=localStorage.getItem("baratinhoPendingCheckout");
-  const savedPage=pendingProduct?"checkout":(location.hash.startsWith("#/")?decodeURIComponent(location.hash.slice(2)):"dashboard");
-  await render(savedPage);
+  // Após autenticar, iniciar sempre no Início. Não abrir automaticamente um checkout pendente.
+  localStorage.removeItem("baratinhoPendingCheckout");
+  localStorage.removeItem("baratinhoBuyerCountry");
+  await render("dashboard");
  }catch(e){
   console.error("Falha ao abrir painel:",e);
   $("appView").classList.add("hidden");$("pendingView").classList.add("hidden");$("publicCatalogView").classList.add("hidden");$("authView").classList.remove("hidden");
