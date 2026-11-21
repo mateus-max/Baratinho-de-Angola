@@ -315,6 +315,11 @@
 #appView .checkout-success h2{color:#126d49}
 @media(max-width:560px){#appView .checkout-shell .panel{padding:15px}#appView .checkout-product img,#appView .checkout-product-placeholder{width:82px;height:92px;min-width:82px}#appView .checkout-product{gap:10px}#appView .checkout-success{padding:20px 15px}}
 
+
+#appView .order-proof{margin-top:16px;padding:14px;border:1px solid #dce5f1;border-radius:12px;background:#f8faff}
+#appView .order-proof h4{margin:0 0 10px;color:#092f73}
+#appView .order-proof-frame{width:100%;height:520px;border:1px solid #dce5f1;border-radius:8px;background:white}
+#appView .order-proof-image{display:block;max-width:100%;max-height:520px;object-fit:contain;margin:10px auto;border-radius:8px}
 </style>
 </head>
 <body>
@@ -562,11 +567,13 @@ else if(page==="products"){const all=await readProducts(),mine=all.filter(([id,p
    Object.assign(orderMap,buyerSnap.val()||{},sellerSnap?.val()||{});
   }
  }catch(err){main.innerHTML=pageHead("Encomendas","Não foi possível carregar as encomendas.")+'<div class="message error">'+esc(friendly(err))+'</div>';return}
- const rows=Object.entries(orderMap).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
- main.innerHTML=pageHead(isAdmin?"Encomendas da plataforma":canSell?"As minhas compras e vendas":"Minhas compras","Acompanhe cada etapa da encomenda. As actualizações aparecem automaticamente.")+
+ const uniqueRows=Object.entries(orderMap).filter(([id,o])=>o&&(isAdmin||o.buyerUid===currentUser.uid||(canSell&&o.sellerUid===currentUser.uid)));
+ const rows=uniqueRows.sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
+ const proofMap={};await Promise.all(rows.map(async([id])=>{try{const ps=await get(ref(db,"paymentProofs/"+id));proofMap[id]=ps.val()||null}catch(err){console.warn("Comprovativo indisponível",id,err)}}));
+ main.innerHTML=pageHead(isAdmin?"Encomendas da plataforma":canSell?"As minhas compras e vendas":"Minhas compras","Acompanhe cada etapa da encomenda. A confirmação depende da aprovação da Direcção.")+
  '<div class="row-between" style="margin:0 0 14px"><span class="muted">'+rows.length+' encomenda(s)</span><button class="btn btn-light" data-refresh-orders>Actualizar</button></div>'+
- (rows.map(([id,o])=>orderTrackingCard(id,o,{canSell,isAdmin})).join("")||'<div class="panel empty">Ainda não existem compras ou encomendas.</div>');
- rows.forEach(([id])=>{const orderRef=ref(db,"orders/"+id);orderTrackingRefs.push(orderRef);onValue(orderRef,snap=>{const card=document.querySelector('[data-order-card="'+id+'"]');if(card&&snap.exists())card.outerHTML=orderTrackingCard(id,snap.val(),{canSell,isAdmin});});});
+ (rows.map(([id,o])=>orderTrackingCard(id,o,{canSell,isAdmin,proof:proofMap[id]})).join("")||'<div class="panel empty">Ainda não existem compras ou encomendas.</div>');
+ rows.forEach(([id])=>{const orderRef=ref(db,"orders/"+id);orderTrackingRefs.push(orderRef);onValue(orderRef,async snap=>{const card=document.querySelector('[data-order-card="'+id+'"]');if(card&&snap.exists()){let proof=proofMap[id];try{const ps=await get(ref(db,"paymentProofs/"+id));proof=ps.val()||null;proofMap[id]=proof}catch{}card.outerHTML=orderTrackingCard(id,snap.val(),{canSell,isAdmin,proof});}});});
 }else if(page==="checkout"){await renderCheckoutPage(main);}else if(page==="favorites"){const s=await get(ref(db,"favorites/"+currentUser.uid)),ids=Object.keys(s.val()||{}),all=await readProducts();main.innerHTML=pageHead("Favoritos","Produtos que guardou para consultar mais tarde.")+'<div class="grid-products">'+all.filter(([id])=>ids.includes(id)).map(([id,p])=>productCard(id,p)).join("")+'</div>';
 }else if(page==="profile"){
  selectedAvatar="";
