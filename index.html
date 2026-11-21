@@ -601,6 +601,100 @@
 #appView .grid-products>.product-card{display:flex!important;flex-direction:column!important;grid-column:auto!important;grid-row:auto!important;width:100%!important;max-width:none!important;min-width:0!important;float:none!important;justify-self:stretch!important;align-self:stretch!important}
 #appView .grid-products>.product-card .product-info{width:100%!important;min-width:0!important}
 @media(min-width:900px){#appView .grid-products{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important}}
+
+/* Sincronizar integralmente a grelha de produtos autenticada com o catálogo público */
+#appView .grid-products{
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ grid-auto-columns:minmax(0,1fr)!important;
+ grid-auto-flow:row!important;
+ align-items:stretch!important;
+ justify-items:stretch!important;
+ gap:8px!important;
+ width:100%!important;
+}
+#appView .grid-products>*{
+ grid-column:auto!important;
+ grid-row:auto!important;
+ width:100%!important;
+ min-width:0!important;
+ max-width:100%!important;
+ justify-self:stretch!important;
+ box-sizing:border-box!important;
+}
+#appView .grid-products>.product-card{
+ display:flex!important;
+ flex-direction:column!important;
+ align-self:stretch!important;
+ overflow:hidden!important;
+ border-radius:18px!important;
+}
+#appView .grid-products>.product-card .product-photo{
+ position:relative!important;
+ display:flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+ width:100%!important;
+ height:108px!important;
+ min-height:108px!important;
+ flex:0 0 108px!important;
+ padding:0!important;
+ margin:0!important;
+ overflow:hidden!important;
+ background:#fff!important;
+}
+#appView .grid-products>.product-card .product-photo img{
+ position:static!important;
+ display:block!important;
+ width:100%!important;
+ height:100%!important;
+ max-width:100%!important;
+ max-height:100%!important;
+ object-fit:contain!important;
+ object-position:center!important;
+}
+#appView .grid-products>.product-card .product-info{
+ display:flex!important;
+ flex-direction:column!important;
+ width:100%!important;
+ min-width:0!important;
+ padding:9px 10px 10px!important;
+ box-sizing:border-box!important;
+}
+#appView .grid-products>.product-card .product-actions{
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:7px!important;
+ width:100%!important;
+ margin:10px 0 0!important;
+ padding:0 9px 10px!important;
+ box-sizing:border-box!important;
+}
+#appView .grid-products>.product-card .product-actions>*{
+ display:flex!important;
+ position:static!important;
+ align-items:center!important;
+ justify-content:center!important;
+ width:100%!important;
+ min-width:0!important;
+ max-width:100%!important;
+ min-height:40px!important;
+ margin:0!important;
+ padding:8px 5px!important;
+ box-sizing:border-box!important;
+ white-space:normal!important;
+ overflow-wrap:anywhere!important;
+ font-size:12px!important;
+}
+#appView .grid-products>.product-card .product-edit-action{
+ display:block!important;
+ width:calc(100% - 18px)!important;
+ margin:0 9px 9px!important;
+ box-sizing:border-box!important;
+}
+@media(min-width:900px){
+ #appView .grid-products{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+}
 </style>
 </head>
 <body>
