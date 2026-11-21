@@ -782,6 +782,51 @@
  #appView #mainContent #marketGrid,
  #appView #mainContent .grid-products{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
 }
+
+/* FIX DEFINITIVO: no painel, usar a largura total do ecrã como o catálogo público */
+@media(max-width:760px){
+ #appView .layout{display:block!important;width:100%!important;max-width:100%!important;overflow-x:hidden!important}
+ #appView #mainContent.main{
+  display:block!important;
+  width:100vw!important;
+  max-width:100vw!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:16px 12px 24px!important;
+  box-sizing:border-box!important;
+ }
+ #appView #mainContent #marketGrid,
+ #appView #mainContent .grid-products{
+  display:grid!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-auto-flow:row!important;
+  grid-auto-columns:minmax(0,1fr)!important;
+  column-gap:9px!important;
+  row-gap:12px!important;
+  align-items:stretch!important;
+  justify-items:stretch!important;
+  box-sizing:border-box!important;
+ }
+ #appView #mainContent #marketGrid>.product-card,
+ #appView #mainContent .grid-products>.product-card{
+  display:flex!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  grid-column:auto!important;
+  margin:0!important;
+  box-sizing:border-box!important;
+ }
+ #appView #mainContent #marketGrid>.product-card .product-photo,
+ #appView #mainContent .grid-products>.product-card .product-photo{
+  width:100%!important;height:112px!important;min-height:112px!important;flex:0 0 112px!important;
+ }
+ #appView #mainContent #marketGrid>.product-card .product-info,
+ #appView #mainContent .grid-products>.product-card .product-info{min-width:0!important;width:100%!important;padding:8px!important;box-sizing:border-box!important}
+}
 </style>
 </head>
 <body>
