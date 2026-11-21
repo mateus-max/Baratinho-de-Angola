@@ -695,6 +695,49 @@
 @media(min-width:900px){
  #appView .grid-products{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
 }
+
+/* Grelha explícita para as páginas do painel: Explorar e Os meus produtos */
+#appView #mainContent #marketGrid,
+#appView #mainContent>.grid-products{
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ grid-auto-flow:row!important;
+ grid-auto-columns:minmax(0,1fr)!important;
+ column-gap:10px!important;
+ row-gap:12px!important;
+ align-items:start!important;
+ justify-items:stretch!important;
+ width:100%!important;
+ max-width:100%!important;
+ box-sizing:border-box!important;
+}
+#appView #mainContent #marketGrid>.product-card,
+#appView #mainContent>.grid-products>.product-card{
+ display:flex!important;
+ flex-direction:column!important;
+ grid-column:auto!important;
+ width:100%!important;
+ min-width:0!important;
+ max-width:100%!important;
+ margin:0!important;
+ float:none!important;
+ box-sizing:border-box!important;
+}
+#appView #mainContent #marketGrid>.product-card .product-photo,
+#appView #mainContent>.grid-products>.product-card .product-photo{
+ height:112px!important;
+ min-height:112px!important;
+ flex:0 0 112px!important;
+ width:100%!important;
+}
+#appView #mainContent #marketGrid>.product-card .product-photo img,
+#appView #mainContent>.grid-products>.product-card .product-photo img{
+ width:100%!important;height:100%!important;object-fit:contain!important;
+}
+@media(min-width:900px){
+ #appView #mainContent #marketGrid,
+ #appView #mainContent>.grid-products{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
 </style>
 </head>
 <body>
