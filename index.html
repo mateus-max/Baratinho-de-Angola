@@ -348,6 +348,23 @@
 #publicCatalogView .product-actions .whatsapp-product{display:grid!important;place-items:center!important}
 #publicCatalogView .product-description{position:static!important;width:100%!important;box-sizing:border-box!important}
 @media(max-width:560px){#publicCatalogView .product-photo{height:125px!important;flex-basis:125px!important}#publicCatalogView .product-actions{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}}
+
+/* Catálogo: fotografia à largura integral e cartão mais compacto */
+#publicCatalogView .product-card{width:100%!important;min-width:0!important}
+#publicCatalogView .product-photo{width:100%!important;height:108px!important;min-height:108px!important;flex:0 0 108px!important;padding:0!important;margin:0!important;box-sizing:border-box!important;overflow:hidden!important;background:#fff!important}
+#publicCatalogView .product-photo img{width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center!important;display:block!important;margin:0!important;padding:0!important}
+#publicCatalogView .product-info{padding:9px 10px 10px!important;gap:0!important}
+#publicCatalogView .product-info .badge{align-self:flex-start!important;font-size:10px!important;padding:3px 7px!important;margin-bottom:4px!important}
+#publicCatalogView .product-info h3{font-size:14px!important;line-height:1.2!important;margin:0 0 3px!important}
+#publicCatalogView .product-info .muted{font-size:12px!important;line-height:1.25!important}
+#publicCatalogView .product-info .price{font-size:16px!important;line-height:1.2!important;margin:6px 0!important}
+#publicCatalogView .product-info .old-price{font-size:11px!important}
+#publicCatalogView .product-actions{margin-top:8px!important;gap:6px!important}
+#publicCatalogView .product-actions>*{min-height:36px!important;padding:5px 4px!important;font-size:11px!important;line-height:1.1!important}
+#publicCatalogView .product-actions [data-add-cart] span{white-space:nowrap!important;word-break:normal!important}
+#publicCatalogView .product-actions .cart-icon{width:17px!important;height:17px!important;flex:0 0 17px!important}
+#publicCatalogView .product-actions .whatsapp-icon{width:23px!important;height:23px!important}
+@media(max-width:560px){#publicCatalogView .product-photo{height:104px!important;min-height:104px!important;flex-basis:104px!important}#publicCatalogView .product-info{padding:8px!important}#publicCatalogView .product-info .price{font-size:15px!important}}
 </style>
 </head>
 <body>
