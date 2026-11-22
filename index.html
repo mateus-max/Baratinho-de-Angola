@@ -971,6 +971,41 @@
  #appView .grid-products .product-actions .whatsapp-icon,#appView #marketGrid .product-actions .whatsapp-icon{width:26px!important;height:26px!important}
 }
 @media(max-width:360px){#appView .grid-products,#appView #marketGrid{column-gap:10px!important;row-gap:18px!important}}
+
+/* Separação e compactação dos cartões do catálogo */
+#publicCatalogView .grid-products{column-gap:20px!important;row-gap:26px!important;align-items:stretch!important}
+#publicCatalogView .product-card{margin:0!important;border:1px solid #dce5f1!important;border-radius:22px!important;box-shadow:0 7px 20px rgba(20,45,80,.10)!important;overflow:hidden!important}
+#publicCatalogView .product-card .product-info{padding:9px 10px 7px!important}
+#publicCatalogView .product-card .product-info h3{margin:3px 0 4px!important;line-height:1.2!important}
+#publicCatalogView .product-card .price{margin:6px 0!important}
+#publicCatalogView .product-card .nad-price-row{margin-top:5px!important}
+#publicCatalogView .product-card .saving-share-row{margin:6px 0 8px!important}
+#publicCatalogView .product-card .product-seller{margin:0 8px 8px!important}
+#publicCatalogView .product-card .product-actions{gap:7px!important;padding:0 8px 9px!important}
+#publicCatalogView .product-card .product-actions .btn{min-height:42px!important;padding:8px 6px!important}
+@media(max-width:560px){
+ #publicCatalogView .grid-products{column-gap:14px!important;row-gap:24px!important;padding:0 2px 18px!important}
+ #publicCatalogView .product-card{border-radius:21px!important}
+ #publicCatalogView .product-card .product-photo{height:132px!important;min-height:132px!important;flex-basis:132px!important;padding:5px!important}
+ #publicCatalogView .product-card .product-info{padding:8px 9px 6px!important}
+ #publicCatalogView .product-card .product-info .badge{font-size:10px!important;padding:3px 7px!important}
+ #publicCatalogView .product-card .product-info h3{font-size:14px!important;line-height:1.18!important}
+ #publicCatalogView .product-card .product-location{font-size:11px!important;line-height:1.2!important}
+ #publicCatalogView .product-card .product-stock{font-size:11px!important;line-height:1.2!important}
+ #publicCatalogView .product-card .price{font-size:17px!important;margin:5px 0!important}
+ #publicCatalogView .product-card .nad-toggle{font-size:11px!important;padding:8px 5px!important}
+ #publicCatalogView .product-card .saving-share-row{margin:5px 0 7px!important}
+ #publicCatalogView .product-card .product-seller{min-height:52px!important;margin:0 7px 7px!important;padding:7px!important}
+ #publicCatalogView .product-card .product-actions{gap:6px!important;padding:0 7px 8px!important}
+ #publicCatalogView .product-card .product-actions .btn{min-height:39px!important;font-size:12px!important}
+}
+/* Galeria de imagens e vídeos: faixa deslizável no telemóvel */
+@media(max-width:700px){
+ .product-detail-sheet-body .detail-gallery,.detail-gallery{grid-template-columns:minmax(0,1fr)!important;gap:9px!important}
+ .detail-gallery-main{height:auto!important;aspect-ratio:16/9!important;min-height:170px!important}
+ .detail-gallery-thumbs{display:flex!important;flex-direction:row!important;gap:9px!important;max-height:none!important;max-width:100%!important;overflow-x:auto!important;overflow-y:hidden!important;padding:3px 2px 9px!important;scroll-snap-type:x mandatory!important;-webkit-overflow-scrolling:touch!important;touch-action:pan-x pan-y!important}
+ .detail-thumb{width:92px!important;min-width:92px!important;height:68px!important;scroll-snap-align:start!important}
+}
 </style></head>
 <body>
 <section id="authView" class="auth-wrap">
