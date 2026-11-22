@@ -66,6 +66,6 @@ O domínio actual indicado em `CNAME` é `baratinho.de.angola.apsanlda.com` e es
 3. Só depois de o Firebase confirmar o domínio como ligado, alterar os registos DNS para os valores fornecidos pelo Firebase e retirar a configuração antiga do GitHub Pages.
 4. Testar `/share?id=ID_DO_PRODUTO` e `/share-image?id=ID_DO_PRODUTO` no domínio personalizado.
 
-**Importante:** os ficheiros antigos `cloudflare-worker.js` e `wrangler.toml` foram mantidos temporariamente como referência de migração. Não é necessário publicar nem associar um Cloudflare Worker quando o domínio já estiver a servir pelo Firebase Hosting. Não apagar nem alterar o DNS antigo antes de o domínio Firebase estar verificado, para evitar indisponibilidade da plataforma.
+**Importante:** a implementação antiga do Cloudflare Worker e o ficheiro `wrangler.toml` foram removidos do repositório. A nova implementação usa Firebase Functions. O domínio ainda precisa de ser migrado do GitHub Pages para Firebase Hosting; não alterar os registos DNS antes de o Firebase confirmar o domínio como ligado, para evitar indisponibilidade da plataforma.
 
 As redes sociais guardam pré-visualizações em cache. Depois de actualizar um anúncio, pode ser necessário pedir nova leitura/actualização na ferramenta de depuração da rede social.
