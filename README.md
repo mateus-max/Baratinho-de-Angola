@@ -38,34 +38,3 @@ Não utilizar esta versão para movimentar dinheiro real antes de implementar in
 ## Imagens
 
 As imagens são convertidas para Data URL/Base64 e guardadas directamente no Realtime Database. O limite actual é 400 KB por imagem. Esta abordagem aumenta o consumo de dados e não é adequada para vídeos grandes. A funcionalidade de vídeo ainda não está implementada.
-
-## Pré-visualização de links partilhados (WhatsApp, Facebook e outros)
-
-A aplicação gera links individuais no formato `/share?id=ID_DO_PRODUTO`. A pré-visualização dinâmica é agora preparada por **Firebase Hosting + Firebase Cloud Functions**, consultando os anúncios públicos no **Firebase Realtime Database**. A rota `/share-image?id=ID_DO_PRODUTO` entrega a fotografia guardada no campo `products/{id}/image` (Base64) ou redirecciona para uma imagem HTTPS.
-
-### Configuração e publicação no Firebase
-
-O repositório contém:
-- `firebase.json`: rotas do Hosting para a função `socialPreview`.
-- `functions/index.js`: função HTTP que gera Open Graph/Twitter Card e serve a imagem.
-- `functions/package.json`: dependências da função (Node.js 20).
-
-Antes da publicação:
-1. Confirmar que o projecto Firebase activo é `baratinho-de-angola` e que a conta tem permissões de publicação.
-2. Ter o Firebase CLI instalado e iniciar sessão com a conta autorizada.
-3. Confirmar que o plano do projecto permite Cloud Functions (plano Blaze/billing activo).
-4. Executar `firebase use baratinho-de-angola`.
-5. Instalar dependências com `cd functions && npm install && cd ..`.
-6. Publicar com `firebase deploy --only functions:socialPreview,hosting`.
-
-### Domínio personalizado
-
-O domínio actual indicado em `CNAME` é `baratinho.de.angola.apsanlda.com` e está actualmente configurado para GitHub Pages. Para migrar sem interrupção:
-1. Primeiro publicar Hosting e a função no Firebase.
-2. No Firebase Console → Hosting, adicionar `baratinho.de.angola.apsanlda.com` como domínio personalizado e concluir a verificação DNS indicada pelo Firebase.
-3. Só depois de o Firebase confirmar o domínio como ligado, alterar os registos DNS para os valores fornecidos pelo Firebase e retirar a configuração antiga do GitHub Pages.
-4. Testar `/share?id=ID_DO_PRODUTO` e `/share-image?id=ID_DO_PRODUTO` no domínio personalizado.
-
-**Importante:** a implementação antiga do Cloudflare Worker e o ficheiro `wrangler.toml` foram removidos do repositório. A nova implementação usa Firebase Functions. O domínio ainda precisa de ser migrado do GitHub Pages para Firebase Hosting; não alterar os registos DNS antes de o Firebase confirmar o domínio como ligado, para evitar indisponibilidade da plataforma.
-
-As redes sociais guardam pré-visualizações em cache. Depois de actualizar um anúncio, pode ser necessário pedir nova leitura/actualização na ferramenta de depuração da rede social.
