@@ -1287,9 +1287,32 @@ async function showPublicStore(uid){
    get(ref(db,"publicStores/"+uid)),
    readPublicProducts()
   ]);
-  const st=publicSnap.val()||{};
+  let st=publicSnap.val()||{};
+  // Compatibilidade: lojas aprovadas antes da criação de publicStores continuam visíveis.
+  // As regras actuais já permitem leitura pública do registo sellers/{uid} quando aprovado/activo.
+  if(!publicSnap.exists()){
+   const sellerSnap=await get(ref(db,"sellers/"+uid));
+   const sellerData=sellerSnap.val()||{};
+   const sellerStatus=String(sellerData.status||"").toLowerCase();
+   if(sellerSnap.exists()&&["approved","active"].includes(sellerStatus)){
+    const legacyStore=sellerData.store||sellerData;
+    st={
+     uid,
+     name:legacyStore.name||sellerData.name||sellerData.storeName||"",
+     ownerName:legacyStore.ownerName||sellerData.profile?.name||sellerData.application?.name||sellerData.name||"",
+     cover:legacyStore.cover||sellerData.cover||sellerData.storeCover||sellerData.coverImage||"",
+     logo:legacyStore.logo||sellerData.logo||sellerData.storeLogo||"",
+     ownerAvatar:legacyStore.ownerAvatar||sellerData.profile?.avatar||sellerData.ownerAvatar||"",
+     province:legacyStore.province||sellerData.province||sellerData.profile?.province||"",
+     municipality:legacyStore.municipality||sellerData.municipality||sellerData.profile?.municipality||"",
+     details:legacyStore.details||"",
+     whatsapp:legacyStore.whatsapp||sellerData.whatsapp||sellerData.profile?.phone||"",
+     status:"published"
+    };
+   }
+  }
   const rows=productsRows.filter(([id,p])=>p.sellerUid===uid);
-  if(!publicSnap.exists()){$("publicStoreMount").innerHTML='<div class="panel"><h2>Loja ainda não publicada</h2><p>O vendedor precisa de abrir a gestão da loja e guardar as alterações uma vez para publicar a sua montra.</p></div>';return}
+  if(!st||!st.uid||st.status!=="published"){$("publicStoreMount").innerHTML='<div class="panel"><h2>Loja indisponível</h2><p>Não foi possível localizar uma loja aprovada para este endereço. Confirme se o link corresponde ao vendedor.</p></div>';return}
   const firstProduct=rows[0]?.[1]||{};
   const owner=st.ownerName||firstProduct.sellerName||"Vendedor";
   const storeName=st.name||firstProduct.storeName||"Loja";
