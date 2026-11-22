@@ -1271,9 +1271,12 @@ async function showPublicStore(uid){
   const rows=productsRows.filter(([id,p])=>p.sellerUid===uid);
   if(!sellerSnap&&!rows.length){$("publicStoreMount").innerHTML='<div class="panel"><h2>Loja indisponível</h2><p>Não foi possível obter os dados públicos desta loja.</p></div>';return}
   const firstProduct=rows[0]?.[1]||{};
-  const owner=st.ownerName||shop.profile?.name||firstProduct.sellerName||"Vendedor";
-  const storeName=st.name||shop.name||firstProduct.storeName||"Loja";
-  const cover=st.cover||shop.cover||"",logo=st.logo||"",place=[st.municipality||shop.municipality||firstProduct.municipality,st.province||shop.province||firstProduct.province].filter(Boolean).join(", ")||"Angola";
+  const owner=st.ownerName||shop.ownerName||shop.profile?.name||shop.application?.name||firstProduct.sellerName||"Vendedor";
+  const storeName=st.name||shop.storeName||shop.name||shop.application?.storeName||firstProduct.storeName||"Loja";
+  // Compatibilidade com os campos de imagem usados pelas versões anteriores do formulário da loja.
+  const cover=st.cover||shop.cover||shop.storeCover||shop.coverImage||shop.banner||shop.application?.cover||"";
+  const logo=st.logo||shop.logo||shop.storeLogo||shop.ownerAvatar||shop.profile?.avatar||shop.application?.logo||"";
+  const place=[st.municipality||shop.municipality||shop.profile?.municipality||firstProduct.municipality,st.province||shop.province||shop.profile?.province||firstProduct.province].filter(Boolean).join(", ")||"Angola";
   const phone=String(st.whatsapp||shop.whatsapp||st.phone||shop.phone||firstProduct.whatsapp||firstProduct.sellerWhatsapp||"").replace(/\D/g,"");
   const stock=rows.reduce((n,[id,p])=>n+Math.max(0,Number(p.quantity)||0),0);
   // Encomendas são privadas; não consultar /orders na página pública.
