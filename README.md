@@ -41,18 +41,31 @@ As imagens são convertidas para Data URL/Base64 e guardadas directamente no Rea
 
 ## Pré-visualização de links partilhados (WhatsApp, Facebook e outros)
 
-A aplicação gera links individuais no formato `/share?id=ID_DO_PRODUTO`. O ficheiro `cloudflare-worker.js` prepara os metadados Open Graph específicos do anúncio (título, descrição, preço, localização e fotografia), e encaminha visitantes normais para a página do produto na aplicação. A rota `/share-image?id=ID_DO_PRODUTO` disponibiliza a fotografia guardada como Base64 no Realtime Database.
+A aplicação gera links individuais no formato `/share?id=ID_DO_PRODUTO`. A pré-visualização dinâmica é agora preparada por **Firebase Hosting + Firebase Cloud Functions**, consultando os anúncios públicos no **Firebase Realtime Database**. A rota `/share-image?id=ID_DO_PRODUTO` entrega a fotografia guardada no campo `products/{id}/image` (Base64) ou redirecciona para uma imagem HTTPS.
 
-### Activação necessária no Cloudflare
+### Configuração e publicação no Firebase
 
-O Worker precisa de ser publicado e associado ao domínio; guardar o ficheiro no GitHub, por si só, não activa esta funcionalidade.
+O repositório contém:
+- `firebase.json`: rotas do Hosting para a função `socialPreview`.
+- `functions/index.js`: função HTTP que gera Open Graph/Twitter Card e serve a imagem.
+- `functions/package.json`: dependências da função (Node.js 20).
 
-1. No Cloudflare, criar um Worker e colar o conteúdo de `cloudflare-worker.js`.
-2. Publicar o Worker.
-3. Em **Settings → Domains & Routes**, adicionar a rota `baratinho.de.angola.apsanlda.com/share*` e também `baratinho.de.angola.apsanlda.com/share-image*` para o mesmo Worker.
-4. Confirmar que o domínio está activo no Cloudflare e que o Worker consegue ler os anúncios públicos em `https://baratinho-de-angola-default-rtdb.firebaseio.com/products/{id}.json`.
-5. Testar o link `https://baratinho.de.angola.apsanlda.com/share?id=ID_DO_PRODUTO` no Facebook Sharing Debugger e no WhatsApp.
+Antes da publicação:
+1. Confirmar que o projecto Firebase activo é `baratinho-de-angola` e que a conta tem permissões de publicação.
+2. Ter o Firebase CLI instalado e iniciar sessão com a conta autorizada.
+3. Confirmar que o plano do projecto permite Cloud Functions (plano Blaze/billing activo).
+4. Executar `firebase use baratinho-de-angola`.
+5. Instalar dependências com `cd functions && npm install && cd ..`.
+6. Publicar com `firebase deploy --only functions:socialPreview,hosting`.
 
-As redes sociais guardam pré-visualizações em cache. Depois de actualizar um anúncio, pode ser necessário pedir nova leitura/actualização da pré-visualização na ferramenta de depuração da rede social.
+### Domínio personalizado
 
-**Nota:** o HTML da aplicação estático não consegue, sozinho, gerar metadados diferentes por produto para os robôs das redes sociais. É por isso que o Worker é necessário. As tags genéricas no `index.html` servem como fallback para a página principal.
+O domínio actual indicado em `CNAME` é `baratinho.de.angola.apsanlda.com` e está actualmente configurado para GitHub Pages. Para migrar sem interrupção:
+1. Primeiro publicar Hosting e a função no Firebase.
+2. No Firebase Console → Hosting, adicionar `baratinho.de.angola.apsanlda.com` como domínio personalizado e concluir a verificação DNS indicada pelo Firebase.
+3. Só depois de o Firebase confirmar o domínio como ligado, alterar os registos DNS para os valores fornecidos pelo Firebase e retirar a configuração antiga do GitHub Pages.
+4. Testar `/share?id=ID_DO_PRODUTO` e `/share-image?id=ID_DO_PRODUTO` no domínio personalizado.
+
+**Importante:** os ficheiros antigos `cloudflare-worker.js` e `wrangler.toml` foram mantidos temporariamente como referência de migração. Não é necessário publicar nem associar um Cloudflare Worker quando o domínio já estiver a servir pelo Firebase Hosting. Não apagar nem alterar o DNS antigo antes de o domínio Firebase estar verificado, para evitar indisponibilidade da plataforma.
+
+As redes sociais guardam pré-visualizações em cache. Depois de actualizar um anúncio, pode ser necessário pedir nova leitura/actualização na ferramenta de depuração da rede social.
