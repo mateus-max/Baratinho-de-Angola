@@ -38,3 +38,21 @@ Não utilizar esta versão para movimentar dinheiro real antes de implementar in
 ## Imagens
 
 As imagens são convertidas para Data URL/Base64 e guardadas directamente no Realtime Database. O limite actual é 400 KB por imagem. Esta abordagem aumenta o consumo de dados e não é adequada para vídeos grandes. A funcionalidade de vídeo ainda não está implementada.
+
+## Pré-visualização de links partilhados (WhatsApp, Facebook e outros)
+
+A aplicação gera links individuais no formato `/share?id=ID_DO_PRODUTO`. O ficheiro `cloudflare-worker.js` prepara os metadados Open Graph específicos do anúncio (título, descrição, preço, localização e fotografia), e encaminha visitantes normais para a página do produto na aplicação. A rota `/share-image?id=ID_DO_PRODUTO` disponibiliza a fotografia guardada como Base64 no Realtime Database.
+
+### Activação necessária no Cloudflare
+
+O Worker precisa de ser publicado e associado ao domínio; guardar o ficheiro no GitHub, por si só, não activa esta funcionalidade.
+
+1. No Cloudflare, criar um Worker e colar o conteúdo de `cloudflare-worker.js`.
+2. Publicar o Worker.
+3. Em **Settings → Domains & Routes**, adicionar a rota `baratinho.de.angola.apsanlda.com/share*` e também `baratinho.de.angola.apsanlda.com/share-image*` para o mesmo Worker.
+4. Confirmar que o domínio está activo no Cloudflare e que o Worker consegue ler os anúncios públicos em `https://baratinho-de-angola-default-rtdb.firebaseio.com/products/{id}.json`.
+5. Testar o link `https://baratinho.de.angola.apsanlda.com/share?id=ID_DO_PRODUTO` no Facebook Sharing Debugger e no WhatsApp.
+
+As redes sociais guardam pré-visualizações em cache. Depois de actualizar um anúncio, pode ser necessário pedir nova leitura/actualização da pré-visualização na ferramenta de depuração da rede social.
+
+**Nota:** o HTML da aplicação estático não consegue, sozinho, gerar metadados diferentes por produto para os robôs das redes sociais. É por isso que o Worker é necessário. As tags genéricas no `index.html` servem como fallback para a página principal.
