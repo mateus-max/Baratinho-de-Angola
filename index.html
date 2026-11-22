@@ -1260,18 +1260,19 @@ async function showPublicCatalog(){$("authView").classList.add("hidden");$("pend
 
 async function syncPublicStore(uid,shop,profileData={}){
  const st=shop?.store||shop||{};
- if(!uid||!shop||!["approved","active"].includes(String(shop.status||"").toLowerCase()))return;
+ if(!uid||!shop||!["approved","active"].includes(String(shop.status||st.status||"").toLowerCase()))return;
  const publicData={
   uid,
   name:st.name||shop.name||shop.storeName||"",
   ownerName:st.ownerName||profileData.name||shop.profile?.name||shop.application?.name||"",
-  cover:st.cover||shop.cover||shop.storeCover||shop.coverImage||"",
-  logo:st.logo||shop.logo||shop.storeLogo||"",
-  ownerAvatar:st.ownerAvatar||profileData.avatar||shop.ownerAvatar||"",
+  // Compatibilidade com os nomes de campos usados nas versões anteriores do formulário.
+  cover:st.cover||st.coverImage||st.banner||shop.cover||shop.storeCover||shop.coverImage||shop.banner||shop.application?.cover||"",
+  logo:st.logo||st.profileImage||st.storeLogo||shop.logo||shop.storeLogo||shop.application?.logo||"",
+  ownerAvatar:st.ownerAvatar||st.avatar||profileData.avatar||profileData.photoURL||profileData.photo||shop.profile?.avatar||shop.ownerAvatar||"",
   province:st.province||shop.province||shop.profile?.province||"",
   municipality:st.municipality||shop.municipality||shop.profile?.municipality||"",
-  details:st.details||"",
-  whatsapp:st.whatsapp||shop.whatsapp||"",
+  details:st.details||shop.details||"",
+  whatsapp:st.whatsapp||shop.whatsapp||shop.profile?.phone||"",
   status:"published",
   updatedAt:Date.now()
  };
