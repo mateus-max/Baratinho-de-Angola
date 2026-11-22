@@ -1151,11 +1151,16 @@ async function routeSignedInUser(user){
  currentUser=user;
  try{
   const snap=await get(ref(db,"users/"+user.uid));
-  profile=snap.val();
-  if(!profile){
-   profile={uid:user.uid,email:user.email,name:user.email?.split("@")[0]||"Utilizador",role:"buyer",status:"pending",approvalStatus:"pending",createdAt:Date.now()};
-   await set(ref(db,"users/"+user.uid),profile);
-  }
+  const savedProfile=snap.val();
+  profile=(savedProfile&&typeof savedProfile==="object"&&!Array.isArray(savedProfile))
+   ? {...savedProfile}
+   : {uid:user.uid,email:user.email||"",name:user.email?.split("@")[0]||"Utilizador",role:"buyer",status:"pending",approvalStatus:"pending",createdAt:Date.now()};
+  // Garantir que a sessão nunca continua com perfil nulo ou sem papel definido.
+  profile.uid=profile.uid||user.uid;
+  profile.email=profile.email||user.email||"";
+  profile.name=profile.name||user.email?.split("@")[0]||"Utilizador";
+  profile.role=profile.role||"buyer";
+  if(!savedProfile) await set(ref(db,"users/"+user.uid),profile);
   $("authView").classList.add("hidden");
   if(profile.approvalStatus==="rejected"||profile.status==="rejected"){
    $("appView").classList.add("hidden");$("pendingView").classList.remove("hidden");
@@ -1167,7 +1172,7 @@ async function routeSignedInUser(user){
   $("pendingView").classList.add("hidden");$("appView").classList.remove("hidden");
   updateUserChip();
   watchUserNotifications(user.uid);
-  const sellerSnap=await get(ref(db,"sellers/"+user.uid));const sellerData=sellerSnap.val();profile.canSell=profile.role==="seller"||sellerData?.status==="approved";if(sellerData?.store?.name)profile.storeName=sellerData.store.name;
+  const sellerSnap=await get(ref(db,"sellers/"+user.uid));const sellerData=sellerSnap.val()||{};profile=profile||{uid:user.uid,email:user.email||"",name:"Utilizador",role:"buyer"};profile.role=profile.role||"buyer";profile.canSell=profile.role==="seller"||sellerData.status==="approved";if(sellerData.store?.name)profile.storeName=sellerData.store.name;
   buildRoleNavigation();
   // Após autenticar, iniciar sempre no Início. Não abrir automaticamente um checkout pendente.
   localStorage.removeItem("baratinhoPendingCheckout");
