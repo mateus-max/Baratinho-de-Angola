@@ -1060,6 +1060,49 @@
 .public-store-about>div{display:flex;justify-content:space-between;gap:12px;padding:13px 3px;border-bottom:1px solid #edf1f7;font-size:14px}
 .public-store-about>div:last-child{border-bottom:0}
 .public-store-about b{color:#092f73}.public-store-about span{color:#52627b;text-align:right}
+
+/* Refinamento visual da montra pública: mais compacta e melhor adaptada ao telemóvel */
+.public-store-page .public-store-hero{border-radius:24px;box-shadow:0 12px 32px #092f7312}
+.public-store-page .public-store-cover{height:clamp(190px,29vw,275px)}
+.public-store-page .public-store-cover img{object-position:center 45%}
+.public-store-page .public-store-cover-placeholder{font-size:62px;background:linear-gradient(135deg,#0b347e,#1766c4)}
+.public-store-page .public-store-hero-copy{left:25px;bottom:19px}
+.public-store-page .public-store-profile-row{margin-top:-34px;align-items:flex-end;padding:0 22px;gap:14px}
+.public-store-page .public-store-logo{width:88px;height:88px;min-width:88px;border-radius:50%;overflow:hidden;border:4px solid #fff;box-shadow:0 5px 18px #092f7330}
+.public-store-page .public-store-logo img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.public-store-page .public-store-owner{padding-top:0;padding-bottom:5px}
+.public-store-page .public-store-owner strong{font-size:20px;line-height:1.2}
+.public-store-page .store-active-badge{margin-bottom:7px}
+.public-store-page .public-store-hero-actions{padding:15px 22px 19px;gap:10px}
+.public-store-page .public-store-hero-actions .btn{min-height:46px;border-radius:13px;padding:10px 17px;font-weight:800}
+.public-store-page .public-store-hero-actions .btn-light{background:#f0f5ff;border:1px solid #e0e9f8}
+.public-store-page .public-store-description{margin:16px 3px;padding:0 5px}
+.public-store-page .public-store-stats{box-shadow:0 5px 18px #092f7308}
+.public-store-page .public-store-tabs button{transition:background .18s ease,transform .18s ease}
+.public-store-page .public-store-tabs button:active{transform:scale(.98)}
+@media(max-width:650px){
+ .public-store-page .public-store-cover{height:205px}
+ .public-store-page .public-store-hero-copy{left:16px;bottom:14px}
+ .public-store-page .public-store-profile-row{padding:0 13px;gap:9px;margin-top:-30px;align-items:flex-end}
+ .public-store-page .public-store-logo{width:72px;height:72px;min-width:72px}
+ .public-store-page .public-store-owner{padding:0 0 4px}
+ .public-store-page .public-store-owner strong{font-size:15px}
+ .public-store-page .public-store-owner span{font-size:10px}
+ .public-store-page .store-active-badge{font-size:10px;padding:6px 8px;margin-bottom:3px}
+ .public-store-page .public-store-hero-actions{padding:12px 13px 15px;gap:8px}
+ .public-store-page .public-store-hero-actions .btn{font-size:13px;padding:9px 12px;min-height:42px}
+ .public-store-page .public-store-stats{padding:13px 4px}
+ .public-store-page .public-store-tabs{gap:6px}
+ .public-store-page .public-store-tabs button{font-size:11px;padding:11px 2px;white-space:normal;line-height:1.2;min-height:43px}
+}
+@media(max-width:390px){
+ .public-store-page .public-store-cover{height:190px}
+ .public-store-page .public-store-profile-row{gap:7px}
+ .public-store-page .public-store-logo{width:64px;height:64px;min-width:64px}
+ .public-store-page .public-store-owner strong{font-size:14px}
+ .public-store-page .store-active-badge{font-size:9px;padding:5px 7px}
+ .public-store-page .public-store-hero-actions .btn{font-size:12px;padding:8px 10px}
+}
 @media(max-width:650px){
  .public-store-page{margin-bottom:18px}.public-store-page .public-store-cover{height:225px}
  .public-store-hero-copy{left:17px;bottom:16px}.public-store-hero-copy h1{font-size:27px}
@@ -1331,7 +1374,7 @@ async function showPublicStore(uid){
   const phone=String(st.whatsapp||firstProduct.whatsapp||firstProduct.sellerWhatsapp||"").replace(/\D/g,"");
   const stock=rows.reduce((n,[id,p])=>n+Math.max(0,Number(p.quantity)||0),0);
   // Encomendas são privadas; não consultar /orders na página pública.
-  const orders="—";
+  const orders=0;
   const desc=st.details||"Encontre os melhores produtos na minha loja e com os melhores preços.";
   const mount=$("publicStoreMount");
   mount.innerHTML='<div class="public-store-page"><section class="public-store-hero"><div class="public-store-cover">'+(cover?'<img src="'+esc(cover)+'" alt="Capa da loja">':'<div class="public-store-cover-placeholder">🏪</div>')+'<div class="public-store-cover-shade"></div><div class="public-store-hero-copy"><span class="public-store-official">▣ Loja oficial</span><h1>'+esc(storeName)+'</h1><p>⌖ '+esc(place)+'</p></div></div><div class="public-store-profile-row"><div class="public-store-logo">'+(logo?'<img src="'+esc(logo)+'" alt="">':'🏬')+'</div><div class="public-store-owner"><strong>'+esc(owner)+'</strong><span>Vendedor no Baratinho de Angola</span></div><span class="store-active-badge">Loja activa</span></div><div class="public-store-hero-actions"><button class="btn btn-primary" id="sharePublicStoreGuest" type="button">↗ Partilhar loja</button>'+(phone?'<a class="btn btn-light" target="_blank" rel="noopener noreferrer" href="https://wa.me/'+esc(phone)+'">Contactar</a>':'')+'</div></section><p class="public-store-description">'+esc(desc)+'</p><div class="public-store-stats"><div><span class="public-store-stat-icon">▣</span><strong>'+rows.length+'</strong><small>Produtos</small></div><div><span class="public-store-stat-icon">☆</span><strong>'+orders+'</strong><small>Encomendas</small></div><div><span class="public-store-stat-icon">▦</span><strong>'+stock.toLocaleString("pt-AO")+'</strong><small>Unidades em stock</small></div></div><nav class="public-store-tabs"><button class="active" data-guest-store-tab="products">▣ Produtos</button><button data-guest-store-tab="reviews">☆ Avaliações</button><button data-guest-store-tab="about">● Sobre a Loja</button><button data-guest-store-tab="contact">▢ Contactar</button></nav><section class="public-store-tab-panel" id="guestStoreProducts"><div class="public-store-section-head"><h2>Produtos da loja</h2><span>'+rows.length+' anúncios</span></div><div class="public-store-products">'+(rows.map(([id,p])=>productCard(id,{...p,storeName,sellerUid:uid})).join("")||'<div class="empty">Esta loja ainda não publicou produtos.</div>')+'</div></section><section class="public-store-tab-panel hidden" id="guestStoreReviews"><div class="public-store-empty-tab"><span>☆</span><strong>Ainda não existem avaliações</strong><p>As avaliações dos clientes aparecerão aqui.</p></div></section><section class="public-store-tab-panel hidden" id="guestStoreAbout"><div class="public-store-section-head"><h2>Sobre a loja</h2></div><div class="public-store-about"><p>'+esc(desc)+'</p><div><b>Nome da loja</b><span>'+esc(storeName)+'</span></div><div><b>Vendedor</b><span>'+esc(owner)+'</span></div><div><b>Localização</b><span>'+esc(place)+'</span></div></div></section><section class="public-store-tab-panel hidden" id="guestStoreContact"><div class="public-store-contact-card"><span>✆</span><strong>Contactar a loja</strong><p>Fale directamente com o vendedor para esclarecer dúvidas.</p>'+(phone?'<a class="btn btn-primary" target="_blank" rel="noopener noreferrer" href="https://wa.me/'+esc(phone)+'">Conversar pelo WhatsApp</a>':'<p>O vendedor ainda não disponibilizou um contacto público.</p>')+'</div></section></div>';
