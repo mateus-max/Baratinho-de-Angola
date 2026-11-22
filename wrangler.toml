@@ -1,8 +1,0 @@
-name = "baratinho-social-preview"
-main = "cloudflare-worker.js"
-compatibility_date = "2026-11-22"
-
-routes = [
-  { pattern = "baratinho.de.angola.apsanlda.com/share*", zone_name = "apsanlda.com" },
-  { pattern = "baratinho.de.angola.apsanlda.com/share-image*", zone_name = "apsanlda.com" }
-]
