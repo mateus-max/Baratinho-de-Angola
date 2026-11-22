@@ -1327,28 +1327,40 @@ async function showPublicStore(uid){
  view.innerHTML='<div style="max-width:1100px;margin:auto;padding:18px 0"><div class="row" style="justify-content:space-between;align-items:center;margin-bottom:18px"><div class="brand"><span class="brand-mark">BA</span> Baratinho de Angola</div><button class="btn btn-light" id="backToPublicCatalog" type="button">← Voltar aos produtos</button></div><div id="publicStoreMount"><div class="empty">A carregar a loja...</div></div></div>';
  $("backToPublicCatalog").onclick=()=>{try{history.replaceState(null,"","#/public-catalog")}catch{}showPublicCatalog()};
  try{
-  // Usar a mesma ficha sellers/{uid} que alimenta o painel do vendedor.
-  // As regras RTDB autorizam leitura pública quando a loja está approved/active.
-  const [sellerSnap,productsRows]=await Promise.all([
-   get(ref(db,"sellers/"+uid)),
-   readPublicProducts()
-  ]);
-  const sellerData=sellerSnap.val()||{};
-  const legacyStore=sellerData.store||sellerData;
-  const sellerStatus=String(sellerData.status||"").toLowerCase();
-  const st=sellerSnap.exists()&&["approved","active"].includes(sellerStatus)?{
-   uid,
-   name:legacyStore.name||sellerData.name||sellerData.storeName||"",
-   ownerName:legacyStore.ownerName||sellerData.profile?.name||sellerData.application?.name||sellerData.name||"",
-   cover:legacyStore.cover||legacyStore.coverImage||legacyStore.banner||sellerData.cover||sellerData.storeCover||sellerData.coverImage||sellerData.banner||"",
-   logo:legacyStore.logo||legacyStore.profileImage||legacyStore.storeLogo||sellerData.logo||sellerData.storeLogo||"",
-   ownerAvatar:legacyStore.ownerAvatar||sellerData.profile?.avatar||sellerData.ownerAvatar||"",
-   province:legacyStore.province||sellerData.province||sellerData.profile?.province||"",
-   municipality:legacyStore.municipality||sellerData.municipality||sellerData.profile?.municipality||"",
-   details:legacyStore.details||sellerData.details||"",
-   whatsapp:legacyStore.whatsapp||sellerData.whatsapp||sellerData.profile?.phone||"",
-   status:"published"
-  }:{};
+  // Leituras isoladas: uma permissão negada numa fonte não pode derrubar toda a montra.
+  let st={},productsRows=[];
+  try{
+   const publicSnap=await get(ref(db,"publicStores/"+uid));
+   if(publicSnap.exists())st=publicSnap.val()||{};
+  }catch(publicError){console.warn("Projecção pública indisponível:",publicError)}
+  try{
+   productsRows=await readPublicProducts();
+  }catch(productsError){console.warn("Não foi possível consultar a lista pública de produtos:",productsError)}
+  // Compatibilidade com vendedores antigos: tenta ler o registo aprovado,
+  // mas nunca deixa uma negação desta leitura bloquear a loja pública.
+  if(!st||!Object.keys(st).length){
+   try{
+    const sellerSnap=await get(ref(db,"sellers/"+uid));
+    const sellerData=sellerSnap.val()||{};
+    const legacyStore=sellerData.store||sellerData;
+    const sellerStatus=String(sellerData.status||"").toLowerCase();
+    if(sellerSnap.exists()&&["approved","active"].includes(sellerStatus)){
+     st={
+      uid,
+      name:legacyStore.name||sellerData.name||sellerData.storeName||"",
+      ownerName:legacyStore.ownerName||sellerData.profile?.name||sellerData.application?.name||sellerData.name||"",
+      cover:legacyStore.cover||legacyStore.coverImage||legacyStore.banner||sellerData.cover||sellerData.storeCover||sellerData.coverImage||sellerData.banner||"",
+      logo:legacyStore.logo||legacyStore.profileImage||legacyStore.storeLogo||sellerData.logo||sellerData.storeLogo||"",
+      ownerAvatar:legacyStore.ownerAvatar||sellerData.profile?.avatar||sellerData.ownerAvatar||"",
+      province:legacyStore.province||sellerData.province||sellerData.profile?.province||"",
+      municipality:legacyStore.municipality||sellerData.municipality||sellerData.profile?.municipality||"",
+      details:legacyStore.details||sellerData.details||"",
+      whatsapp:legacyStore.whatsapp||sellerData.whatsapp||sellerData.profile?.phone||"",
+      status:"published"
+     };
+    }
+   }catch(privateReadError){console.info("Registo privado não acessível; a montra continua com dados públicos.",privateReadError)}
+  }
   const rows=productsRows.filter(([id,p])=>p.sellerUid===uid);
   // Não bloquear a montra por falta da projecção publicStores.
   // Os dados dos produtos publicados mantêm a loja visível como anteriormente.
