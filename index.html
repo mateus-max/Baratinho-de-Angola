@@ -942,6 +942,35 @@
  #appView .grid-products .product-owner-actions button,#appView #marketGrid .product-owner-actions button{font-size:11px!important;padding:8px 3px!important}
 }
 @media(max-width:360px){#appView .grid-products,#appView #marketGrid{gap:8px!important}#appView .grid-products .product-info,#appView #marketGrid .product-info{padding:8px 8px 5px!important}#appView .grid-products .product-info h3,#appView #marketGrid .product-info h3{font-size:13px!important}#appView .grid-products .price,#appView #marketGrid .price{font-size:15px!important}}
+</style><style>
+/* Refinamento final dos cartões mobile: separar publicações e reduzir altura interna */
+@media(max-width:600px){
+ #appView .grid-products,#appView #marketGrid{column-gap:14px!important;row-gap:22px!important;align-items:start!important}
+ #appView .grid-products>.product-card,#appView #marketGrid>.product-card{margin:0 0 2px!important;border-radius:20px!important;box-shadow:0 5px 16px rgba(20,45,80,.10)!important;border:1px solid #e5ebf4!important}
+ #appView .grid-products .product-photo,#appView #marketGrid .product-photo{height:145px!important;min-height:145px!important}
+ #appView .grid-products .product-info,#appView #marketGrid .product-info{padding:8px 9px 4px!important}
+ #appView .grid-products .product-info>.badge,#appView #marketGrid .product-info>.badge{font-size:10px!important;padding:4px 8px!important;line-height:1.2!important}
+ #appView .grid-products .product-info h3,#appView #marketGrid .product-info h3{font-size:14px!important;line-height:1.2!important;min-height:0!important;margin:5px 0 4px!important}
+ #appView .grid-products .product-location,#appView #marketGrid .product-location{font-size:11px!important;line-height:1.2!important;margin:2px 0!important}
+ #appView .grid-products .product-stock,#appView #marketGrid .product-stock{font-size:10px!important;line-height:1.15!important;margin:3px 0!important}
+ #appView .grid-products .price,#appView #marketGrid .price{font-size:16px!important;line-height:1.15!important;margin:6px 0!important;padding:5px 8px!important}
+ #appView .grid-products .old-price,#appView #marketGrid .old-price{font-size:10px!important;margin-left:4px!important}
+ #appView .grid-products .nad-price-row,#appView #marketGrid .nad-price-row{margin:4px 0 5px!important;gap:3px!important}
+ #appView .grid-products .nad-toggle,#appView #marketGrid .nad-toggle{font-size:10px!important;padding:7px 8px!important;line-height:1.15!important}
+ #appView .grid-products .saving-share-row,#appView #marketGrid .saving-share-row{min-height:28px!important;margin:0 0 4px!important;padding:0 7px!important;gap:4px!important}
+ #appView .grid-products .saving-badge,#appView #marketGrid .saving-badge{font-size:9px!important;padding:4px 6px!important;line-height:1.1!important}
+ #appView .grid-products .product-share-mini,#appView #marketGrid .product-share-mini{width:28px!important;height:27px!important;flex-basis:28px!important}
+ #appView .grid-products .product-seller,#appView #marketGrid .product-seller{margin:4px 7px 3px!important;width:calc(100% - 14px)!important;padding:6px 7px!important;min-height:48px!important;border-radius:11px!important}
+ #appView .grid-products .seller-store-icon,#appView #marketGrid .seller-store-icon{width:32px!important;height:32px!important;flex-basis:32px!important;font-size:19px!important}
+ #appView .grid-products .seller-store-copy,#appView #marketGrid .seller-store-copy{gap:2px!important}
+ #appView .grid-products .seller-store-copy strong,#appView #marketGrid .seller-store-copy strong{font-size:10px!important;line-height:1.1!important}
+ #appView .grid-products .seller-store-copy small,#appView #marketGrid .seller-store-copy small{font-size:9px!important;line-height:1.1!important}
+ #appView .grid-products .product-actions,#appView #marketGrid .product-actions{gap:6px!important;padding:5px 7px 8px!important;margin-top:2px!important}
+ #appView .grid-products .product-actions .btn,#appView #marketGrid .product-actions .btn{min-height:36px!important;padding:6px 3px!important;font-size:10px!important;border-radius:10px!important}
+ #appView .grid-products .product-actions .cart-icon,#appView #marketGrid .product-actions .cart-icon{width:16px!important;height:16px!important;flex-basis:16px!important}
+ #appView .grid-products .product-actions .whatsapp-icon,#appView #marketGrid .product-actions .whatsapp-icon{width:26px!important;height:26px!important}
+}
+@media(max-width:360px){#appView .grid-products,#appView #marketGrid{column-gap:10px!important;row-gap:18px!important}}
 </style></head>
 <body>
 <section id="authView" class="auth-wrap">
