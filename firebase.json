@@ -9,9 +9,7 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**",
-      "functions/**",
-      "cloudflare-worker.js",
-      "wrangler.toml"
+      "functions/**"
     ],
     "rewrites": [
       {
