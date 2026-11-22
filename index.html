@@ -1006,6 +1006,77 @@
  .detail-gallery-thumbs{display:flex!important;flex-direction:row!important;gap:9px!important;max-height:none!important;max-width:100%!important;overflow-x:auto!important;overflow-y:hidden!important;padding:3px 2px 9px!important;scroll-snap-type:x mandatory!important;-webkit-overflow-scrolling:touch!important;touch-action:pan-x pan-y!important}
  .detail-thumb{width:92px!important;min-width:92px!important;height:68px!important;scroll-snap-align:start!important}
 }
+
+/* Montra pública da loja — visual aprovado */
+.public-store-page{width:100%;max-width:1180px;margin:0 auto 28px;color:#102b55}
+.public-store-hero{background:#fff;border:1px solid #e1e9f6;border-radius:22px;overflow:hidden;box-shadow:0 8px 25px #092f7310}
+.public-store-page .public-store-cover{height:clamp(210px,36vw,330px);max-width:none;margin:0;position:relative;display:block;background:linear-gradient(120deg,#062d76,#0b63ce);overflow:hidden}
+.public-store-page .public-store-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.public-store-cover-placeholder{height:100%;display:grid;place-items:center;font-size:76px;color:#fff}
+.public-store-cover-shade{position:absolute;inset:0;background:linear-gradient(0deg,#041b43c9 0%,#041b431c 65%,transparent 100%)}
+.public-store-hero-copy{position:absolute;left:24px;bottom:20px;color:#fff;text-shadow:0 2px 8px #001b4a70}
+.public-store-hero-copy h1{margin:7px 0 3px;color:#fff;font-size:clamp(25px,4vw,38px);font-weight:900}
+.public-store-hero-copy p{margin:0;color:#fff;font-size:15px;font-weight:650}
+.public-store-official{display:inline-flex;padding:6px 10px;border-radius:30px;background:#ffffffeb;color:#092f73;font-size:12px;font-weight:850;text-shadow:none}
+.public-store-profile-row{display:flex;align-items:center;gap:13px;padding:0 22px;margin-top:-29px;position:relative;z-index:2}
+.public-store-page .public-store-logo{width:82px;height:82px;min-width:82px;border:4px solid #fff;background:#fff;box-shadow:0 4px 18px #092f7330;font-size:32px}
+.public-store-owner{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1;padding-top:28px}
+.public-store-owner strong{font-size:19px;color:#092f73;overflow-wrap:anywhere}
+.public-store-owner span{font-size:13px;color:#718096}
+.public-store-page .store-active-badge{background:#dcfce7;color:#15803d;border-radius:30px;padding:8px 13px;font-size:12px;font-weight:850;white-space:nowrap}
+.public-store-hero-actions{display:flex;justify-content:flex-end;gap:9px;padding:13px 22px 17px}
+.public-store-hero-actions .btn{border-radius:13px;padding:10px 16px}
+.public-store-description{font-size:17px;line-height:1.55;color:#344766;margin:18px 4px 16px;padding:0 8px}
+.public-store-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;background:#eaf1ff;border-radius:20px;padding:18px 10px;margin:16px 0 20px}
+.public-store-stats>div{display:grid;grid-template-columns:auto auto;grid-template-rows:auto auto;justify-content:center;align-items:center;column-gap:10px;padding:3px 8px;border-right:1px solid #cbd9f1}
+.public-store-stats>div:last-child{border-right:0}
+.public-store-stat-icon{grid-row:1/3;font-size:29px;color:#092f73;font-weight:900}
+.public-store-stats strong{font-size:25px;line-height:1.1;color:#092f73}
+.public-store-stats small{font-size:12px;color:#52627b}
+.public-store-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:18px 0 15px}
+.public-store-tabs button{min-width:0;border:1px solid #d9e4f5;background:#f8faff;color:#12366f;border-radius:14px;padding:13px 7px;font-size:14px;font-weight:750;white-space:nowrap}
+.public-store-tabs button.active{background:#082f7b;color:#fff;border-color:#082f7b;box-shadow:0 5px 14px #092f7320}
+.public-store-tab-panel{background:#fff;border:1px solid #e2eaf6;border-radius:20px;padding:17px;margin:0 0 20px;box-shadow:0 6px 20px #092f730a}
+.public-store-section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.public-store-section-head h2{font-size:21px;margin:0;color:#092f73}
+.public-store-section-head span{font-size:12px;color:#718096}
+.public-store-products{display:grid;grid-template-columns:1fr;gap:12px}
+.public-store-products .product-card{display:grid;grid-template-columns:minmax(125px,36%) 1fr;grid-template-rows:1fr auto;overflow:hidden;border:1px solid #dce6f5;border-radius:17px;box-shadow:0 4px 15px #092f730c}
+.public-store-products .product-photo{grid-column:1;grid-row:1/3;height:100%;min-height:220px;position:relative}
+.public-store-products .product-photo img{width:100%;height:100%;object-fit:cover}
+.public-store-products .product-info{grid-column:2;grid-row:1;padding:15px 15px 5px}
+.public-store-products .product-info h3{font-size:19px;color:#092f73;margin:5px 0 8px}
+.public-store-products .product-info .price{font-size:23px;color:#b91c1c;margin:8px 0}
+.public-store-products .product-info .product-location{margin:6px 0}
+.public-store-products .saving-share-row{grid-column:2;grid-row:2;padding:5px 15px 14px;display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.public-store-products .saving-share-row .product-share-mini{width:42px;height:42px}
+.public-store-products .product-seller{display:none}
+.public-store-empty-tab,.public-store-contact-card{min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;color:#52627b}
+.public-store-empty-tab>span,.public-store-contact-card>span{font-size:38px;color:#0b55bb}
+.public-store-empty-tab strong,.public-store-contact-card strong{font-size:17px;color:#092f73;margin:8px 0}
+.public-store-empty-tab p,.public-store-contact-card p{max-width:480px;margin:5px 0 14px}
+.public-store-about{display:grid;gap:0}
+.public-store-about>p{margin:0 0 12px;color:#52627b;line-height:1.6}
+.public-store-about>div{display:flex;justify-content:space-between;gap:12px;padding:13px 3px;border-bottom:1px solid #edf1f7;font-size:14px}
+.public-store-about>div:last-child{border-bottom:0}
+.public-store-about b{color:#092f73}.public-store-about span{color:#52627b;text-align:right}
+@media(max-width:650px){
+ .public-store-page{margin-bottom:18px}.public-store-page .public-store-cover{height:225px}
+ .public-store-hero-copy{left:17px;bottom:16px}.public-store-hero-copy h1{font-size:27px}
+ .public-store-profile-row{padding:0 14px;gap:10px}.public-store-page .public-store-logo{width:68px;height:68px;min-width:68px}
+ .public-store-owner strong{font-size:16px}.public-store-owner span{font-size:11px}
+ .public-store-page .store-active-badge{padding:7px 9px;font-size:11px}
+ .public-store-hero-actions{padding:11px 14px 15px}.public-store-description{font-size:15px;margin:14px 0;padding:0 3px}
+ .public-store-stats{padding:14px 4px;border-radius:16px}.public-store-stats>div{column-gap:6px;padding:3px 4px}
+ .public-store-stat-icon{font-size:22px}.public-store-stats strong{font-size:21px}.public-store-stats small{font-size:10px}
+ .public-store-tabs{gap:6px}.public-store-tabs button{font-size:11px;padding:12px 3px;border-radius:11px}
+ .public-store-tab-panel{padding:12px;border-radius:16px}.public-store-section-head h2{font-size:18px}
+ .public-store-products .product-card{grid-template-columns:39% 1fr}.public-store-products .product-photo{min-height:205px}
+ .public-store-products .product-info{padding:11px 10px 3px}.public-store-products .product-info h3{font-size:15px}
+ .public-store-products .product-info .price{font-size:18px}.public-store-products .product-info .muted,.public-store-products .product-stock{font-size:11px}
+ .public-store-products .saving-share-row{padding:4px 10px 11px}.public-store-products .product-info .badge{font-size:9px}
+}
+@media(max-width:390px){.public-store-tabs button{font-size:10px}.public-store-products .product-card{grid-template-columns:36% 1fr}.public-store-products .product-photo{min-height:190px}.public-store-products .product-info .price{font-size:16px}}
 </style></head>
 <body>
 <section id="authView" class="auth-wrap">
@@ -1293,12 +1364,36 @@ if(page==="dashboard"){
  main.innerHTML=pageHead("Minhas lojas","Descubra e visite lojas de vendedores em Angola.")+
  (!hasOwnStore?'<section class="store-empty-state"><div class="store-empty-art">🏪</div><h2>Ainda não tem uma loja?</h2><p>Crie a sua loja online, publique os seus produtos e comece a vender em Angola.</p><button class="btn store-create-cta" data-goto="create-store">▣ &nbsp; Criar loja online</button><div class="store-benefits"><div><span>🚀</span><b>Venda online</b></div><div><span>▥</span><b>Aumente os seus clientes</b></div><div><span>🛡️</span><b>Gestão simples</b></div></div></section>':'')+
  '<div class="store-directory">'+(list.map(([uid,s])=>'<button class="store-directory-card" data-store-uid="'+esc(uid)+'"><div class="store-directory-cover">'+(s.store?.cover||s.cover?'<img src="'+(s.store?.cover||s.cover)+'" alt="">':'<span>🏪</span>')+'</div><div class="store-directory-info"><span class="store-directory-logo">'+(s.store?.logo?'<img src="'+s.store.logo+'" alt="">':'🏬')+'</span><strong>'+esc(s.store?.name||s.name||"Loja")+'</strong><small>'+esc(s.store?.ownerName||s.profile?.name||"Vendedor")+'</small><small>⌖ '+esc([s.store?.municipality||s.municipality,s.store?.province||s.province].filter(Boolean).join(", ")||"Angola")+'</small></div></button>').join("")|| (own?'':'<div class="empty">Ainda não existem lojas disponíveis.</div>'))+'</div>';
-}else if(page==="view-store"){
- const uid=selectedStoreUid||currentUser.uid;let shop=null,allProducts=[];
- try{const ss=await get(ref(db,"sellers/"+uid));shop=ss.val();const ps=await readProducts();allProducts=ps.filter(([id,p])=>p.sellerUid===uid)}catch(err){main.innerHTML=pageHead("Loja","Não foi possível carregar esta loja.")+'<div class="message error">'+esc(friendly(err))+'</div>';return}
+ }else if(page==="view-store"){
+ const uid=selectedStoreUid||currentUser.uid;let shop=null,allProducts=[],storeOrders=[];
+ try{
+  const ss=await get(ref(db,"sellers/"+uid));shop=ss.val();
+  const ps=await readProducts();allProducts=ps.filter(([id,p])=>p.sellerUid===uid);
+  try{const os=await get(ref(db,"orders"));storeOrders=Object.entries(os.val()||{}).filter(([id,o])=>o&&o.sellerUid===uid&&o.status!=="cancelled")}catch(err){console.warn("Não foi possível calcular as encomendas públicas:",err)}
+ }catch(err){main.innerHTML=pageHead("Loja","Não foi possível carregar esta loja.")+'<div class="message error">'+esc(friendly(err))+'</div>';return}
  if(!shop||shop.status!=="approved"){main.innerHTML=pageHead("Loja indisponível","Esta loja não está disponível neste momento.");return}
  const st=shop.store||shop,cover=st.cover||shop.cover||"",logo=st.logo||"",owner=st.ownerName||shop.profile?.name||"Vendedor";
- main.innerHTML='<section class="public-store-card"><div class="public-store-cover">'+(cover?'<img src="'+cover+'" alt="Capa da loja">':'<div>🏪</div>')+'</div><div class="public-store-heading"><div class="public-store-logo">'+(logo?'<img src="'+logo+'" alt="">':'🏬')+'</div><div class="public-store-title"><h1>'+esc(st.name||shop.name||"Loja")+'</h1><p>'+esc(owner)+'</p><small>⌖ '+esc([st.municipality||shop.municipality,st.province||shop.province].filter(Boolean).join(", ")||"Angola")+'</small></div><span class="store-active-badge">Activa</span></div><p class="public-store-description">'+esc(st.details||"Bem-vindo à nossa loja. Explore os nossos produtos.")+'</p><a class="btn btn-primary store-whatsapp-link" target="_blank" rel="noopener" href="https://wa.me/'+esc((st.whatsapp||shop.whatsapp||"").replace(/\D/g,""))+'">Contactar pelo WhatsApp</a></section><div class="section-title"><h2>Produtos da loja</h2><span>'+allProducts.length+' produtos</span></div><div class="grid-products">'+(allProducts.map(([id,p])=>productCard(id,p)).join("")||'<div class="empty">Esta loja ainda não publicou produtos.</div>')+'</div>';
+ const locationText=[st.municipality||shop.municipality,st.province||shop.province].filter(Boolean).join(", ")||"Angola";
+ const whatsapp=String(st.whatsapp||shop.whatsapp||st.phone||shop.phone||"").replace(/\D/g,"");
+ const stockCount=allProducts.reduce((sum,[id,p])=>sum+Math.max(0,Number(p.quantity)||0),0);
+ const shareStoreUrl=location.origin+location.pathname+"#/view-store";
+ const storeIntro=st.details||"Encontre os melhores produtos na minha loja e com os melhores preços.";
+ const productMarkup=allProducts.map(([id,p])=>productCard(id,p)).join("");
+ main.innerHTML='<div class="public-store-page">'+
+ '<section class="public-store-hero"><div class="public-store-cover">'+(cover?'<img src="'+esc(cover)+'" alt="Capa da loja">':'<div class="public-store-cover-placeholder">🏪</div>')+'<div class="public-store-cover-shade"></div><div class="public-store-hero-copy"><span class="public-store-official">▣ Loja oficial</span><h1>'+esc(st.name||shop.name||"Loja")+'</h1><p>⌖ '+esc(locationText)+'</p></div></div>'+
+ '<div class="public-store-profile-row"><div class="public-store-logo">'+(logo?'<img src="'+esc(logo)+'" alt="Logótipo da loja">':'🏬')+'</div><div class="public-store-owner"><strong>'+esc(owner)+'</strong><span>Vendedor no Baratinho de Angola</span></div><span class="store-active-badge">Loja activa</span></div>'+
+ '<div class="public-store-hero-actions"><button class="btn btn-primary" type="button" id="sharePublicStore">↗ Partilhar loja</button>'+(whatsapp?'<a class="btn btn-light" target="_blank" rel="noopener noreferrer" href="https://wa.me/'+esc(whatsapp)+'">Contactar</a>':'')+'</div></section>'+
+ '<p class="public-store-description">'+esc(storeIntro)+'</p>'+
+ '<div class="public-store-stats"><div><span class="public-store-stat-icon">▣</span><strong>'+allProducts.length+'</strong><small>Produtos</small></div><div><span class="public-store-stat-icon">☆</span><strong>'+storeOrders.length+'</strong><small>Encomendas</small></div><div><span class="public-store-stat-icon">▦</span><strong>'+stockCount.toLocaleString("pt-AO")+'</strong><small>Unidades em stock</small></div></div>'+
+ '<nav class="public-store-tabs" aria-label="Secções da loja"><button type="button" class="active" data-public-store-tab="products">▣ Produtos</button><button type="button" data-public-store-tab="reviews">☆ Avaliações</button><button type="button" data-public-store-tab="about">● Sobre a Loja</button><button type="button" data-public-store-tab="contact">▢ Contactar</button></nav>'+
+ '<section class="public-store-tab-panel" id="publicStoreProducts"><div class="public-store-section-head"><h2>Produtos da minha loja</h2><span>'+allProducts.length+' anúncios</span></div><div class="public-store-products">'+(productMarkup||'<div class="empty">Esta loja ainda não publicou produtos.</div>')+'</div></section>'+
+ '<section class="public-store-tab-panel hidden" id="publicStoreReviews"><div class="public-store-section-head"><h2>Avaliações dos clientes</h2></div><div class="public-store-empty-tab"><span>☆</span><strong>Ainda não existem avaliações</strong><p>As opiniões dos clientes aparecerão aqui quando o sistema de avaliações estiver disponível.</p></div></section>'+
+ '<section class="public-store-tab-panel hidden" id="publicStoreAbout"><div class="public-store-section-head"><h2>Sobre a loja</h2></div><div class="public-store-about"><p>'+esc(storeIntro)+'</p><div><b>Nome da loja</b><span>'+esc(st.name||shop.name||"Loja")+'</span></div><div><b>Vendedor</b><span>'+esc(owner)+'</span></div><div><b>Localização</b><span>'+esc(locationText)+'</span></div><div><b>Estado</b><span class="store-active-badge">Activa</span></div></div></section>'+
+ '<section class="public-store-tab-panel hidden" id="publicStoreContact"><div class="public-store-section-head"><h2>Contactar a loja</h2></div><div class="public-store-contact-card"><span>✆</span><strong>Fale directamente com o vendedor</strong><p>Esclareça dúvidas sobre produtos, disponibilidade e entregas.</p>'+(whatsapp?'<a class="btn btn-primary" target="_blank" rel="noopener noreferrer" href="https://wa.me/'+esc(whatsapp)+'">Conversar pelo WhatsApp</a>':'<p>O vendedor ainda não disponibilizou um contacto público.</p>')+'</div></section></div>';
+ const tabs=main.querySelectorAll("[data-public-store-tab]");
+ tabs.forEach(tab=>tab.addEventListener("click",()=>{tabs.forEach(item=>item.classList.toggle("active",item===tab));["products","reviews","about","contact"].forEach(key=>{const panel=main.querySelector("#publicStore"+key[0].toUpperCase()+key.slice(1));if(panel)panel.classList.toggle("hidden",key!==tab.dataset.publicStoreTab)})}));
+ const shareButton=main.querySelector("#sharePublicStore");
+ if(shareButton)shareButton.addEventListener("click",async()=>{const title=st.name||shop.name||"Loja";try{if(navigator.share)await navigator.share({title:title+" | Baratinho de Angola",text:"Visite a loja "+title+" no Baratinho de Angola.",url:shareStoreUrl});else{await navigator.clipboard.writeText(shareStoreUrl);shareButton.textContent="Link copiado"}}catch(err){if(err?.name!=="AbortError")prompt("Copie o link da loja:",shareStoreUrl)}});
 }else if(page==="create-store"||page==="store"){
  const isNewSellerApplication=profile?.role!=="seller";
  let shop=null;try{const ss=await get(ref(db,"sellers/"+currentUser.uid));shop=ss.val()}catch(err){main.innerHTML=pageHead("Loja online","Não foi possível consultar os dados da loja.")+'<div class="message error">'+esc(friendly(err))+'</div>';return}
