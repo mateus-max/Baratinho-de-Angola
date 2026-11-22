@@ -1186,7 +1186,6 @@ if(page==="dashboard"){
   '<div class="ba-home-cta"><strong>Descubra mais oportunidades</strong><span>Produtos, cursos, vídeos e serviços num só lugar.</span><button type="button" data-goto="market">Explorar plataforma ›</button></div>';
   const searchAction=()=>render("market");$("buyerSearch").onkeydown=e=>{if(e.key==="Enter")searchAction()};$("buyerSearchBtn").onclick=searchAction;
   document.querySelectorAll("[data-home-category]").forEach(btn=>btn.onclick=()=>render("market"));
-=e=>{if(e.key==="Enter")searchAction()};$("buyerSearchBtn").onclick=searchAction;
  }
 '<div class="stats"><div class="stat"><span>Produtos disponíveis</span><strong>'+all.length+'</strong></div><div class="stat"><span>Os meus produtos</span><strong>'+mine.length+'</strong></div><div class="stat"><span>As minhas encomendas</span><strong>'+orders.length+'</strong></div><div class="stat"><span>Tipo de conta</span><strong style="font-size:19px">'+(profile.role==="seller"?"Vendedor":"Comprador")+'</strong></div></div><div class="panel"><div class="row-between"><h3>Produtos em destaque</h3><button class="btn btn-light" data-goto="market">Ver todos</button></div><div class="grid-products">'+(all.slice(0,6).map(([id,p])=>productCard(id,p)).join("")||'<div class="empty">Ainda não existem produtos publicados.</div>')+'</div></div>';
 }else if(page==="sellers"){
