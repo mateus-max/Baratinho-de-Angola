@@ -1318,12 +1318,14 @@ async function showPublicStore(uid){
    }
   }
   const rows=productsRows.filter(([id,p])=>p.sellerUid===uid);
-  if(!st||!st.uid||st.status!=="published"){$("publicStoreMount").innerHTML='<div class="panel"><h2>Loja indisponível</h2><p>Não foi possível localizar uma loja aprovada para este endereço. Confirme se o link corresponde ao vendedor.</p></div>';return}
+  // Não bloquear a montra por falta da projecção publicStores.
+  // Os dados dos produtos publicados mantêm a loja visível como anteriormente.
   const firstProduct=rows[0]?.[1]||{};
-  const owner=st.ownerName||firstProduct.sellerName||"Vendedor";
-  const storeName=st.name||firstProduct.storeName||"Loja";
-  const cover=st.cover||"";
-  const logo=st.logo||st.ownerAvatar||"";
+  st=st||{};
+  const owner=st.ownerName||firstProduct.sellerName||firstProduct.ownerName||"Vendedor";
+  const storeName=st.name||firstProduct.storeName||firstProduct.sellerStoreName||"Loja";
+  const cover=st.cover||st.storeCover||st.coverImage||firstProduct.storeCover||firstProduct.sellerCover||firstProduct.cover||"";
+  const logo=st.logo||st.ownerAvatar||st.profileImage||firstProduct.storeLogo||firstProduct.sellerLogo||firstProduct.ownerAvatar||firstProduct.sellerAvatar||"";
   const place=[st.municipality||firstProduct.municipality,st.province||firstProduct.province].filter(Boolean).join(", ")||"Angola";
   const phone=String(st.whatsapp||firstProduct.whatsapp||firstProduct.sellerWhatsapp||"").replace(/\D/g,"");
   const stock=rows.reduce((n,[id,p])=>n+Math.max(0,Number(p.quantity)||0),0);
