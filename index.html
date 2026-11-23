@@ -1746,3 +1746,33 @@ async function buy(id){
 async function favorite(id){try{if(!currentUser){localStorage.setItem("baratinhoPendingFavorite",id);$("publicCatalogView").classList.add("hidden");$("authView").classList.remove("hidden");setMode("register");authMsg("Crie uma conta ou entre para guardar este produto nos favoritos.","ok");return}const r=ref(db,"favorites/"+currentUser.uid+"/"+id),s=await get(r);if(s.exists()){await set(r,null)}else{await set(r,true)}alert("Lista de favoritos actualizada.");}catch(e){alert(friendly(e))}}
 </script>
 </body></html>
+
+/* Correcção: separar a capa dos dados da loja, sem sobreposição */
+#appView .seller-store-head,
+#appView .public-store-heading{
+  margin-top:14px!important;
+  padding-top:0!important;
+  align-items:center!important;
+}
+#appView .seller-store-name h2,
+#appView .public-store-title h1{
+  margin-top:0!important;
+}
+#appView .seller-store-cover,
+#appView .public-store-cover{
+  margin-bottom:0!important;
+}
+@media(max-width:760px){
+  #appView .seller-store-head,
+  #appView .public-store-heading{
+    margin-top:14px!important;
+    padding-left:14px!important;
+    padding-right:14px!important;
+    gap:11px!important;
+  }
+  #appView .seller-store-name h2,
+  #appView .public-store-title h1{
+    margin-top:0!important;
+    line-height:1.2!important;
+  }
+}
