@@ -925,6 +925,70 @@
 #appView .seller-store-logo,#appView .public-store-logo{margin-top:0!important}
 #appView .seller-store-name h2,#appView .public-store-title h1{margin:0!important;line-height:1.2!important}
 
+
+/* Loja pública: apresentação renovada e responsiva */
+#appView .public-store-page{max-width:1050px;margin:0 auto 32px}
+#appView .public-store-hero{border-radius:24px;overflow:hidden;background:#fff}
+#appView .public-store-page .public-store-cover{height:clamp(185px,34vw,300px);margin:0;position:relative}
+#appView .public-store-cover-shade{background:linear-gradient(0deg,#041b4340,transparent 55%)}
+#appView .public-store-official{position:absolute;left:18px;bottom:16px;z-index:3;background:#fff;color:#092f73;border-radius:30px;padding:9px 14px;font-weight:850;font-size:13px;box-shadow:0 3px 12px #001b4a25}
+#appView .public-store-profile-row{display:flex;align-items:center;gap:14px;padding:18px 20px 12px;margin:0;position:relative}
+#appView .public-store-page .public-store-logo{width:82px;height:82px;min-width:82px;margin:0;border:4px solid #fff}
+#appView .public-store-owner{padding:0;gap:4px}
+#appView .public-store-owner strong{font-size:clamp(18px,3vw,24px);line-height:1.2}
+#appView .public-store-owner span,#appView .public-store-owner small{font-size:13px;color:#64748b}
+#appView .public-store-owner small{display:block}
+#appView .public-store-page .store-active-badge{display:inline-flex;align-items:center;gap:6px;flex-shrink:0}
+#appView .store-active-badge i{width:8px;height:8px;border-radius:50%;background:#16a34a;display:inline-block}
+#appView .public-store-hero-actions{display:flex;gap:10px;padding:8px 20px 20px;margin:0}
+#appView .public-store-hero-actions .btn{min-height:46px;border-radius:14px;padding:12px 18px}
+#appView .public-store-hero-actions .btn-primary{background:#0757c9}
+#appView .public-store-description{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid #e4ebf6;border-radius:18px;padding:16px 18px;margin:18px 0;color:#344767;line-height:1.55;box-shadow:0 4px 14px #092f7308}
+#appView .public-store-description-icon{font-size:23px;line-height:1.4}
+#appView .public-store-description p{margin:0;overflow-wrap:anywhere}
+#appView .public-store-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;background:transparent;padding:0;margin:16px 0 20px}
+#appView .public-store-stats>div{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:#eaf1ff;border:1px solid #e0eaf9;border-radius:16px;padding:14px 8px}
+#appView .public-store-stat-icon{font-size:22px;line-height:1.2}
+#appView .public-store-stats strong{font-size:24px}
+#appView .public-store-stats small{font-size:12px}
+#appView .public-store-tabs{position:static;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:18px 0 14px}
+#appView .public-store-tabs button{border-radius:14px;padding:12px 5px;font-size:13px;white-space:normal;min-height:48px}
+#appView .public-store-tab-panel{padding:16px;border-radius:20px}
+#appView .public-store-section-head{margin-bottom:14px}
+#appView .public-store-section-head h2{font-size:19px;color:#092f73}
+#appView .public-store-products{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#appView .public-store-products .product-card{display:flex;flex-direction:column;min-width:0;grid-template-columns:none;grid-template-rows:none}
+#appView .public-store-products .product-photo{height:175px;min-height:175px;flex:0 0 175px}
+#appView .public-store-products .product-info{padding:12px}
+#appView .public-store-products .product-info h3{font-size:15px}
+@media(max-width:760px){
+ #appView .public-store-page{margin-bottom:24px}
+ #appView .public-store-page .public-store-cover{height:clamp(170px,58vw,245px)}
+ #appView .public-store-profile-row{padding:15px 13px 10px;gap:10px;align-items:center}
+ #appView .public-store-page .public-store-logo{width:68px;height:68px;min-width:68px}
+ #appView .public-store-owner strong{font-size:17px}
+ #appView .public-store-owner span,#appView .public-store-owner small{font-size:11px}
+ #appView .public-store-page .store-active-badge{font-size:10px;padding:7px 9px}
+ #appView .public-store-hero-actions{padding:8px 13px 15px}
+ #appView .public-store-hero-actions .btn{flex:1;justify-content:center;font-size:13px;padding:10px 8px}
+ #appView .public-store-description{padding:13px;margin:14px 0;font-size:14px}
+ #appView .public-store-stats{gap:7px}
+ #appView .public-store-stats>div{padding:12px 4px}
+ #appView .public-store-stats strong{font-size:21px}
+ #appView .public-store-stats small{font-size:10px;text-align:center}
+ #appView .public-store-tabs{gap:6px}
+ #appView .public-store-tabs button{font-size:11px;padding:10px 3px;line-height:1.2}
+ #appView .public-store-tab-panel{padding:12px}
+ #appView .public-store-products{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ #appView .public-store-products .product-photo{height:132px;min-height:132px;flex-basis:132px}
+}
+@media(max-width:380px){
+ #appView .public-store-profile-row{flex-wrap:wrap}
+ #appView .public-store-page .store-active-badge{margin-left:78px}
+ #appView .public-store-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+ #appView .public-store-tabs button{font-size:10px}
+}
+
 </style>
 <style>#productForm [hidden]{display:none!important}</style><style>.product-owner-actions{display:flex;gap:8px;margin:8px 0}.product-owner-actions button{flex:1;min-height:38px;border:0;border-radius:9px;font-weight:750;cursor:pointer}.product-owner-actions .product-edit-action{background:#eaf2ff;color:#17417a}.product-owner-actions .product-delete-action{background:#fff0f0;color:#a52332}.product-owner-actions button:disabled{opacity:.55;cursor:wait}</style><style>.product-edit-card [hidden]{display:none!important}</style><style id="catalog-product-image-size">
 /* Dar maior destaque às fotografias dos produtos no catálogo público */
@@ -1577,13 +1641,13 @@ if(page==="dashboard"){
  const storeIntro=st.details||"Encontre os melhores produtos na minha loja e com os melhores preços.";
  const productMarkup=allProducts.map(([id,p])=>productCard(id,p)).join("");
  main.innerHTML='<div class="public-store-page">'+
- '<section class="public-store-hero"><div class="public-store-cover">'+(cover?'<img src="'+esc(cover)+'" alt="Capa da loja">':'<div class="public-store-cover-placeholder">🏪</div>')+'<div class="public-store-cover-shade"></div><div class="public-store-hero-copy"><span class="public-store-official">▣ Loja oficial</span><h1>'+esc(st.name||shop.name||"Loja")+'</h1><p>⌖ '+esc(locationText)+'</p></div></div>'+
- '<div class="public-store-profile-row"><div class="public-store-logo">'+(logo?'<img src="'+esc(logo)+'" alt="Logótipo da loja">':'🏬')+'</div><div class="public-store-owner"><strong>'+esc(owner)+'</strong><span>Vendedor no Baratinho de Angola</span></div><span class="store-active-badge">Loja activa</span></div>'+
+ '<section class="public-store-hero"><div class="public-store-cover">'+(cover?'<img src="'+esc(cover)+'" alt="Capa da loja">':'<div class="public-store-cover-placeholder">🏪</div>')+'<div class="public-store-cover-shade"></div><span class="public-store-official">▣ Loja oficial</span></div>'+
+ '<div class="public-store-profile-row"><div class="public-store-logo">'+(logo?'<img src="'+esc(logo)+'" alt="Logótipo da loja">':'🏬')+'</div><div class="public-store-owner"><strong>'+esc(st.name||shop.name||"Loja")+'</strong><span>♙ '+esc(owner)+'</span><small>⌖ '+esc(locationText)+'</small></div><span class="store-active-badge"><i></i> Loja activa</span></div>'+
  '<div class="public-store-hero-actions"><button class="btn btn-primary" type="button" id="sharePublicStore">↗ Partilhar loja</button>'+(whatsapp?'<a class="btn btn-light" target="_blank" rel="noopener noreferrer" href="https://wa.me/'+esc(whatsapp)+'">Contactar</a>':'')+'</div></section>'+
- '<p class="public-store-description">'+esc(storeIntro)+'</p>'+
+ '<div class="public-store-description"><span class="public-store-description-icon">🛍️</span><p>'+esc(storeIntro)+'</p></div>'+
  '<div class="public-store-stats"><div><span class="public-store-stat-icon">▣</span><strong>'+allProducts.length+'</strong><small>Produtos</small></div><div><span class="public-store-stat-icon">☆</span><strong>'+storeOrders.length+'</strong><small>Encomendas</small></div><div><span class="public-store-stat-icon">▦</span><strong>'+stockCount.toLocaleString("pt-AO")+'</strong><small>Unidades em stock</small></div></div>'+
  '<nav class="public-store-tabs" aria-label="Secções da loja"><button type="button" class="active" data-public-store-tab="products">▣ Produtos</button><button type="button" data-public-store-tab="reviews">☆ Avaliações</button><button type="button" data-public-store-tab="about">● Sobre a Loja</button><button type="button" data-public-store-tab="contact">▢ Contactar</button></nav>'+
- '<section class="public-store-tab-panel" id="publicStoreProducts"><div class="public-store-section-head"><h2>Produtos da minha loja</h2><span>'+allProducts.length+' anúncios</span></div><div class="public-store-products">'+(productMarkup||'<div class="empty">Esta loja ainda não publicou produtos.</div>')+'</div></section>'+
+ '<section class="public-store-tab-panel" id="publicStoreProducts"><div class="public-store-section-head"><h2>✦ Destaques da loja</h2><span>'+allProducts.length+' produtos</span></div><div class="public-store-products">'+(productMarkup||'<div class="empty">Esta loja ainda não publicou produtos.</div>')+'</div></section>'+
  '<section class="public-store-tab-panel hidden" id="publicStoreReviews"><div class="public-store-section-head"><h2>Avaliações dos clientes</h2></div><div class="public-store-empty-tab"><span>☆</span><strong>Ainda não existem avaliações</strong><p>As opiniões dos clientes aparecerão aqui quando o sistema de avaliações estiver disponível.</p></div></section>'+
  '<section class="public-store-tab-panel hidden" id="publicStoreAbout"><div class="public-store-section-head"><h2>Sobre a loja</h2></div><div class="public-store-about"><p>'+esc(storeIntro)+'</p><div><b>Nome da loja</b><span>'+esc(st.name||shop.name||"Loja")+'</span></div><div><b>Vendedor</b><span>'+esc(owner)+'</span></div><div><b>Localização</b><span>'+esc(locationText)+'</span></div><div><b>Estado</b><span class="store-active-badge">Activa</span></div></div></section>'+
  '<section class="public-store-tab-panel hidden" id="publicStoreContact"><div class="public-store-section-head"><h2>Contactar a loja</h2></div><div class="public-store-contact-card"><span>✆</span><strong>Fale directamente com o vendedor</strong><p>Esclareça dúvidas sobre produtos, disponibilidade e entregas.</p>'+(whatsapp?'<a class="btn btn-primary" target="_blank" rel="noopener noreferrer" href="https://wa.me/'+esc(whatsapp)+'">Conversar pelo WhatsApp</a>':'<p>O vendedor ainda não disponibilizou um contacto público.</p>')+'</div></section></div>';
